@@ -162,22 +162,84 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true, amount: 0.2 }}
-        className="py-16 sm:py-20 lg:py-28 bg-white text-center"
+        className="py-20 bg-gradient-to-b from-gray-50 via-white to-gray-100"
       >
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
-            Get in Touch
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 text-center">
+          {/* Heading */}
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900">
+            Get in <span className="text-pink-600">Touch</span>
           </h2>
-          <p className="mt-6 text-base sm:text-lg lg:text-xl text-gray-700">
-            Have questions or want to know more? Reach out to us and we’ll be
-            happy to help.
+          <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+            Have questions or want to know more? Reach out to us and we’ll be happy to help.
           </p>
-          <p className="mt-6 text-gray-800 font-medium">
-            📧 contact@kerashine.com
-          </p>
-          <p className="text-gray-800 font-medium">📍 Karachi, Pakistan</p>
+
+          {/* Contact Cards */}
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {/* Email */}
+            <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition">
+              <div className="text-pink-600 text-3xl mb-4">📧</div>
+              <h3 className="font-semibold text-lg text-gray-900">Email</h3>
+              <a
+                href="mailto:kerashinecosmetics@gmail.com"
+                className="text-gray-700 mt-2 block hover:text-pink-600"
+              >
+                kerashinecosmetics@gmail.com
+              </a>
+            </div>
+
+            {/* Phone */}
+            <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition">
+              <div className="text-pink-600 text-3xl mb-4">📞</div>
+              <h3 className="font-semibold text-lg text-gray-900">Phone</h3>
+              <a
+                href="tel:+923352545444"
+                className="text-gray-700 mt-2 block hover:text-pink-600"
+              >
+                +92 335 2545444
+              </a>
+            </div>
+
+            {/* Location */}
+            <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition">
+              <div className="text-pink-600 text-3xl mb-4">📍</div>
+              <h3 className="font-semibold text-lg text-gray-900">Location</h3>
+              <a
+                href="https://www.google.com/maps/place/Umani+Glow+Salon/@24.9485224,67.0432755,17z"
+                target="_blank"
+                className="text-gray-700 mt-2 block hover:text-pink-600"
+              >
+                House, Ground Floor, Khatija Market, <br />
+                62 Blessing A, Block I, <br />
+                North Nazimabad Town, Karachi, 75600
+              </a>
+            </div>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="mt-12 flex flex-wrap justify-center gap-4">
+            <a
+              href="mailto:kerashinecosmetics@gmail.com"
+              className="px-6 py-3 bg-pink-600 text-white rounded-xl shadow hover:bg-pink-700 transition"
+            >
+              Send Email
+            </a>
+            <a
+              href="tel:+923352545444"
+              className="px-6 py-3 bg-white text-pink-600 border border-pink-600 rounded-xl shadow hover:bg-pink-50 transition"
+            >
+              Call Now
+            </a>
+            <a
+              href="https://www.google.com/maps/place/Umani+Glow+Salon/@24.9485224,67.0432755,17z"
+              target="_blank"
+              className="px-6 py-3 bg-white text-pink-600 border border-pink-600 rounded-xl shadow hover:bg-pink-50 transition"
+            >
+              Get Directions
+            </a>
+          </div>
         </div>
       </motion.section>
+
 
       {/* ✅ Footer */}
       <footer className="bg-black text-gray-400 py-8 text-center">
