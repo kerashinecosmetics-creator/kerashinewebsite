@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Product } from "@/lib/products";
 import { useCart } from "@/app/context/CartContext";
+import Image from 'next/image';
 
 type Props = {
   product: Product;
@@ -21,10 +22,12 @@ export default function ProductCard({ product }: Props) {
     >
       {/* Image */}
       <div className="relative flex items-center justify-center px-8 pt-12 pb-6">
-        <img
+        <Image
           src={product.image}
           alt={product.name}
           className="h-[420px] object-contain drop-shadow-2xl transition-transform duration-500 hover:scale-105"
+          width={420}      // approximate width
+          height={420}     // approximate height
         />
       </div>
 

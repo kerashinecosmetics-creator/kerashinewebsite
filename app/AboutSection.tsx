@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from 'next/image';
 
 const AboutSection = () => {
   const videos = [
@@ -29,17 +30,19 @@ const AboutSection = () => {
           className="relative flex flex-col items-center"
         >
           <div className="relative w-full max-w-sm overflow-hidden rounded-3xl shadow-xl border-4 border-white/70">
-            <img
+            <Image
               src="/about/founder.png"
               alt="Founder"
-              className="object-cover object-top w-full h-[420px]" // 👈 Half crop
+              className="object-cover object-top w-full h-[420px]"
+              width={420}      // required
+              height={420}     // required (aprox. height)
             />
             <span className="absolute bottom-4 left-4 bg-pink-600 text-white px-5 py-2 rounded-xl text-sm font-semibold shadow-md">
               Founder & Visionary
             </span>
           </div>
           <p className="mt-6 italic text-gray-700 text-lg text-center max-w-md">
-            “Beauty is not just about appearance, it’s about the confidence and
+            “Beauty is not just about appearance, it&apos;s about the confidence and
             elegance you carry every day.”
           </p>
           <p className="mt-4 font-signature text-pink-600 text-2xl">— Kerashine</p>
