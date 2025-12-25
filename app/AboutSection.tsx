@@ -55,7 +55,7 @@ const AboutSection = () => {
         >
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-snug">
             The Story of <br />
-            <span className="text-pink-600">KERA SHINE</span>
+            <span className="text-pink-600">KERASHINE</span>
           </h2>
           <p className="mt-6 text-lg text-gray-700 leading-relaxed max-w-lg">
             What started at{" "}
