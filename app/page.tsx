@@ -210,6 +210,88 @@ export default function Home() {
           </>
         )}
       </AnimatePresence>
+
+      {/* ✅ About Section */}
+      <AboutSection />
+
+      {/* ================= CONTACT ================= */}
+      <section
+        id="contact"
+        className="py-24 bg-gradient-to-b from-gray-50 via-white to-gray-100"
+      >
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          {/* Heading */}
+          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
+            Get in <span className="text-pink-600">Touch</span>
+          </h2>
+
+          <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+            Have questions or want to know more? Reach out to us and we’ll be happy
+            to help.
+          </p>
+
+          {/* Cards */}
+          <div className="mt-16 grid gap-10 md:grid-cols-3">
+            {/* Email */}
+            <div className="bg-white rounded-2xl shadow-lg p-10 hover:shadow-xl transition">
+              <div className="text-pink-600 text-4xl mb-6">✉️</div>
+              <h3 className="text-xl font-semibold text-gray-900">Email</h3>
+              <p className="mt-3 text-gray-600">
+                kerashinecosmetics@gmail.com
+              </p>
+            </div>
+
+            {/* Phone */}
+            <div className="bg-white rounded-2xl shadow-lg p-10 hover:shadow-xl transition">
+              <div className="text-pink-600 text-4xl mb-6">📞</div>
+              <h3 className="text-xl font-semibold text-gray-900">Phone</h3>
+              <p className="mt-3 text-gray-600">+92 335 2545444</p>
+            </div>
+
+            {/* Location */}
+            <div className="bg-white rounded-2xl shadow-lg p-10 hover:shadow-xl transition">
+              <div className="text-pink-600 text-4xl mb-6">📍</div>
+              <h3 className="text-xl font-semibold text-gray-900">Location</h3>
+              <p className="mt-3 text-gray-600 leading-relaxed">
+                House, Ground Floor, Khatija Market,<br />
+                62 Blessing A, Block I,<br />
+                North Nazimabad Town, Karachi,<br />
+                75600
+              </p>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="mt-14 flex flex-wrap justify-center gap-6">
+            <a
+              href="mailto:kerashinecosmetics@gmail.com"
+              className="px-8 py-3 rounded-full bg-pink-600 text-white font-semibold hover:bg-pink-700 transition"
+            >
+              Send Email
+            </a>
+
+            <a
+              href="tel:+923352545444"
+              className="px-8 py-3 rounded-full border-2 border-pink-600 text-pink-600 font-semibold hover:bg-pink-600 hover:text-white transition"
+            >
+              Call Now
+            </a>
+
+            <a
+              href="https://maps.google.com/?q=North+Nazimabad+Town+Karachi"
+              target="_blank"
+              className="px-8 py-3 rounded-full border-2 border-pink-600 text-pink-600 font-semibold hover:bg-pink-600 hover:text-white transition"
+            >
+              Get Directions
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ✅ Footer */}
+      <footer className="bg-black text-gray-400 py-8 text-center">
+        <p>© {new Date().getFullYear()} KERA SHINE. All Rights Reserved.</p>
+      </footer>
     </main>
   );
 }
