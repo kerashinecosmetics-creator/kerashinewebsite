@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ProductsSection from "./ProductsSection";
@@ -18,10 +18,21 @@ export default function Home() {
 
   const subtotal = items.reduce((total, item) => total + item.price * item.qty, 0);
 
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 80);
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  
   return (
     <main className="bg-black text-white overflow-hidden">
       {/* ================= NAVBAR ================= */}
-      <header className="fixed top-0 left-0 w-full z-50">
+      <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-white text-black shadow-md" : "bg-transparent text-white"}`}>
         <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
           {/* Logo */}
           <div className="text-xl tracking-[0.35em] font-light">
@@ -31,18 +42,10 @@ export default function Home() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-14 text-xs tracking-widest uppercase">
-            <a className="opacity-80 hover:opacity-100 transition" href="#home">
-              Home
-            </a>
-            <a className="opacity-80 hover:opacity-100 transition" href="#products">
-              Collection
-            </a>
-            <a className="opacity-80 hover:opacity-100 transition" href="#about">
-              Story
-            </a>
-            <a className="opacity-80 hover:opacity-100 transition" href="#contact">
-              Contact
-            </a>
+            <a className={`transition ${scrolled ? "text-black" : "text-white"}`} href="#home">Home</a>
+            <a className={`transition ${scrolled ? "text-black" : "text-white"}`} href="#products">Collection</a>
+            <a className={`transition ${scrolled ? "text-black" : "text-white"}`} href="#about">Story</a>
+            <a className={`transition ${scrolled ? "text-black" : "text-white"}`} href="#contact">Contact</a>
           </nav>
 
           {/* Right */}
