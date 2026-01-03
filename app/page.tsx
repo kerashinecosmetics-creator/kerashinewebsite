@@ -6,18 +6,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import ProductsSection from "./ProductsSection";
 import AboutSection from "./AboutSection";
 import { useCart } from "@/app/context/CartContext";
-import Link from "next/link";
 import { Minus, Plus, Trash } from "lucide-react";
-import SignatureSets from "@/app/components/product/SignatureSets";
+import Link from "next/link";
+import Image from "next/image";
 
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false); // mobile menu
   const [cartOpen, setCartOpen] = useState(false); // cart flyout
   const { items, addToCart, removeFromCart, decreaseQty } = useCart();
-
   const subtotal = items.reduce((total, item) => total + item.price * item.qty, 0);
-
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -33,9 +31,9 @@ export default function Home() {
     <main className="bg-black text-white overflow-hidden">
       {/* ================= NAVBAR ================= */}
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-out ${
           scrolled
-            ? "bg-white/95 backdrop-blur text-black shadow-sm"
+            ? "bg-white/95 backdrop-blur-md text-black shadow-[0_4px_30px_rgba(0,0,0,0.05)]"
             : "bg-transparent text-white"
         }`}
       >
@@ -49,18 +47,23 @@ export default function Home() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-12 text-[11px] tracking-[0.35em] uppercase">
-            <a href="#products" className="hover:opacity-70 transition">
-              Shop
-            </a>
-            <a href="#products" className="hover:opacity-70 transition">
-              Products
-            </a>
-            <a href="#about" className="hover:opacity-70 transition">
-              Our Story
-            </a>
-            <a href="#contact" className="hover:opacity-70 transition">
-              Contact
-            </a>
+            {["Shop", "Products", "Our Story", "Contact"].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase().replace(" ", "")}`}
+                className="relative group transition-colors duration-300"
+              >
+                <span className="group-hover:text-pink-600">
+                  {item}
+                </span>
+
+                {/* underline */}
+                <span
+                  className={`absolute left-0 -bottom-2 h-[1px] w-0 bg-pink-600 
+                  transition-all duration-300 group-hover:w-full`}
+                />
+              </a>
+            ))}
           </nav>
 
           {/* Right Actions */}
@@ -89,39 +92,181 @@ export default function Home() {
 
       {/* ================= MOBILE MENU ================= */}
       <AnimatePresence>
-        {isOpen && (
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.6 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black z-40"
+            onClick={() => setIsOpen(false)}
+          />
+
+          {/* Menu */}
+          <motion.div
+            initial={{ y: "-100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-100%" }}
+            transition={{ duration: 0.7, ease: [0.77, 0, 0.175, 1] }}
+            className="fixed inset-0 z-50 bg-black flex flex-col"
+          >
+            {/* Top */}
+            <div className="flex items-center justify-between px-6 pt-6">
+              <span className="tracking-[0.4em] text-sm">
+                KERA<span className="font-semibold ml-2">SHINE</span>
+              </span>
+
+              <button onClick={() => setIsOpen(false)}>
+                <X size={26} />
+              </button>
+            </div>
+
+            {/* Nav */}
+            <nav className="flex-1 flex flex-col items-center justify-center gap-12 text-3xl tracking-widest uppercase">
+              {["Home", "Collection", "Story", "Contact"].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  onClick={() => setIsOpen(false)}
+                  className="relative group"
+                >
+                  <span className="transition-colors duration-300 group-hover:text-pink-600">
+                    {item}
+                  </span>
+
+                  <span className="absolute left-1/2 -bottom-3 h-[1px] w-0 bg-pink-600 transition-all duration-300 group-hover:w-1/2 group-hover:left-1/4" />
+                </a>
+              ))}
+            </nav>
+
+            {/* Footer Accent */}
+            <div className="pb-10 text-center text-xs tracking-[0.3em] opacity-50">
+              PREMIUM HAIR CARE
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+
+    {/* ================= CART FLYOUT ================= */}
+      <AnimatePresence>
+        {cartOpen && (
           <>
+            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.5 }}
+              animate={{ opacity: 0.4 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 bg-black z-40"
-              onClick={() => setIsOpen(false)}
+              onClick={() => setCartOpen(false)}
             />
 
-            <motion.div
-              initial={{ y: "-100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "-100%" }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              className="fixed inset-0 bg-black z-50 flex flex-col"
+            {/* Drawer */}
+            <motion.aside
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.6, ease: [0.77, 0, 0.175, 1] }}
+              className="fixed right-0 top-0 h-full w-full sm:w-[420px] bg-white z-50 flex flex-col"
             >
-              <div className="w-full flex items-center justify-between px-6 pt-6">
-                <span className="font-bold text-lg tracking-widest">
-                  KERASHINE
-                </span>
-
-                <button onClick={() => setIsOpen(false)}>
-                  <X size={26} />
+              {/* Header */}
+              <div className="flex items-center justify-between px-6 py-6 border-b">
+                <h2 className="text-xs tracking-[0.35em] uppercase text-black">
+                  Your Cart
+                </h2>
+                <button onClick={() => setCartOpen(false)}>
+                  <X className="text-black" />
                 </button>
               </div>
-              <nav className="mt-24 flex flex-col items-center gap-12 text-2xl tracking-widest uppercase">
-                <a href="#home" onClick={() => setIsOpen(false)}>Home</a>
-                <a href="#products" onClick={() => setIsOpen(false)}>Collection</a>
-                <a href="#about" onClick={() => setIsOpen(false)}>Story</a>
-                <a href="#contact" onClick={() => setIsOpen(false)}>Contact</a>
-              </nav>
-            </motion.div>
+
+              {/* Items */}
+              <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+                {items.length === 0 ? (
+                  <p className="text-sm text-gray-500 text-center mt-20">
+                    Your cart is currently empty.
+                  </p>
+                ) : (
+                  items.map((item) => (
+                    <div
+                      key={item.id}
+                      className="flex gap-4 border-b pb-6 last:border-none"
+                    >
+                      {/* Image */}
+                      <div className="relative w-20 h-20 rounded-md overflow-hidden bg-gray-100">
+                        {item.image && (
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            fill
+                            className="object-cover"
+                          />
+                        )}
+                      </div>
+
+                      {/* Info */}
+                      <div className="flex-1">
+                        <h3 className="text-sm text-black font-medium">
+                          {item.name}
+                        </h3>
+                        <p className="text-xs text-gray-500 mt-1">
+                          Rs {item.price.toLocaleString()}
+                        </p>
+
+                        {/* Quantity */}
+                        <div className="flex items-center gap-4 mt-3">
+                          <button
+                            onClick={() => decreaseQty(item.id)}
+                            className="w-7 h-7 flex items-center justify-center border rounded-full text-black hover:bg-black hover:text-white transition"
+                          >
+                            <Minus size={14} />
+                          </button>
+
+                          <span className="text-sm text-black">
+                            {item.qty}
+                          </span>
+
+                          <button
+                            onClick={() => addToCart(item)}
+                            className="w-7 h-7 flex items-center justify-center border rounded-full text-black hover:bg-black hover:text-white transition"
+                          >
+                            <Plus size={14} />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Remove */}
+                      <button
+                        onClick={() => removeFromCart(item.id)}
+                        className="text-gray-400 hover:text-pink-600 transition"
+                      >
+                        <Trash size={16} />
+                      </button>
+                    </div>
+                  ))
+                )}
+              </div>
+
+              {/* Footer */}
+              {items.length > 0 && (
+                <div className="border-t px-6 py-6">
+                  <div className="flex justify-between text-sm text-black mb-4">
+                    <span>Subtotal</span>
+                    <span>Rs {subtotal.toLocaleString()}</span>
+                  </div>
+
+                  <Link href="/cart">
+                    <button className="w-full bg-black text-white py-4 text-xs tracking-widest uppercase hover:bg-pink-600 transition">
+                      Proceed to Checkout
+                    </button>
+                  </Link>
+
+                  <p className="text-[10px] text-center text-gray-400 mt-4">
+                    Shipping & taxes calculated at checkout
+                  </p>
+                </div>
+              )}
+            </motion.aside>
           </>
         )}
       </AnimatePresence>
@@ -212,140 +357,298 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= PRODUCTS ================= */}
-      <section id="products" className="py-28 bg-gray-50">
-        <SignatureSets />
-        <ProductsSection />
+      {/* ================= WHY SECTION ================= */}
+      <section id="products"
+        className="relative py-36 overflow-hidden
+                  bg-gradient-to-br from-pink-100 via-rose-100 to-orange-100"
+      >
+        {/* Ambient glow */}
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-pink-300/30 blur-[180px]" />
+
+        <div className="relative max-w-7xl mx-auto px-6">
+
+          {/* Heading */}
+          <div className="max-w-2xl mb-24">
+            <p className="text-xs tracking-[0.45em] uppercase text-pink-600">
+              Why Kerashine
+            </p>
+
+            <h2 className="mt-8 text-5xl md:text-6xl font-serif leading-tight text-gray-900">
+              More Than Haircare —
+              <br />
+              <span className="text-pink-600">
+                It’s a Standard
+              </span>
+            </h2>
+
+            <p className="mt-8 text-lg text-gray-700 leading-relaxed">
+              KERASHINE is crafted for those who expect more from their hair.
+              Professional-grade formulas designed to deliver real results,
+              without compromise.
+            </p>
+          </div>
+
+          {/* Pillars */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-14">
+
+            {/* Card 1 */}
+            <div className="rounded-[36px] bg-[#fff7f4] p-14 shadow-xl">
+              <h3 className="text-2xl font-serif text-gray-900">
+                Salon-Grade Formulas
+              </h3>
+              <p className="mt-4 text-gray-700 leading-relaxed">
+                Developed to meet professional salon standards, delivering
+                performance you can see and feel from the very first use.
+              </p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="rounded-[36px] bg-[#fff4f6] p-14 shadow-xl">
+              <h3 className="text-2xl font-serif text-gray-900">
+                Designed for Real Hair
+              </h3>
+              <p className="mt-4 text-gray-700 leading-relaxed">
+                Every formula is tested across diverse hair types to ensure
+                effectiveness for everyday routines and long-term care.
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="rounded-[36px] bg-[#fff8f2] p-14 shadow-xl">
+              <h3 className="text-2xl font-serif text-gray-900">
+                Clean & Conscious Care
+              </h3>
+              <p className="mt-4 text-gray-700 leading-relaxed">
+                Thoughtfully formulated without unnecessary harsh additives,
+                balancing performance with gentle care.
+              </p>
+            </div>
+
+            {/* Card 4 */}
+            <div className="rounded-[36px] bg-[#fff5fb] p-14 shadow-xl">
+              <h3 className="text-2xl font-serif text-gray-900">
+                Visible Results
+              </h3>
+              <p className="mt-4 text-gray-700 leading-relaxed">
+                From improved texture to long-lasting shine, KERASHINE delivers
+                results you can trust — not empty promises.
+              </p>
+            </div>
+
+          </div>
+        </div>
       </section>
 
-      {/* ================= CART FLYOUT ================= */}
-      <AnimatePresence>
-        {cartOpen && (
-          <>
-            {/* Overlay */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.5 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black z-50"
-              onClick={() => setCartOpen(false)}
-            />
+      {/* ================= HAIR RITUAL ================= */}
+      <section
+        className="relative py-28 overflow-hidden
+                  bg-gradient-to-br from-rose-200 via-pink-100 to-fuchsia-100"
+      >
+        {/* Soft ambient shapes */}
+        <div className="absolute -top-32 right-0 w-[420px] h-[420px] bg-pink-400/25 rounded-full blur-[140px]" />
+        <div className="absolute bottom-0 -left-32 w-[420px] h-[420px] bg-rose-300/30 rounded-full blur-[160px]" />
 
-            {/* Panel */}
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "tween", duration: 0.3 }}
-              className="fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl z-50 flex flex-col"
-            >
-              <div className="flex justify-between items-center p-6 border-b">
-                <h2 className="text-2xl font-semibold">Your Cart</h2>
-                <button onClick={() => setCartOpen(false)}>
-                  <X size={24} className="text-black" />
+        <div className="relative max-w-7xl mx-auto px-6">
+
+          {/* Heading */}
+          <div className="max-w-xl mb-20">
+            <p className="text-xs tracking-[0.45em] uppercase text-pink-700">
+              The Ritual
+            </p>
+
+            <h2 className="mt-8 text-4xl md:text-5xl font-serif leading-tight text-gray-900">
+              A Simple Routine —
+              <br />
+              <span className="text-pink-600">
+                Designed to Perform
+              </span>
+            </h2>
+          </div>
+
+          {/* Steps */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+            <div className="rounded-[32px] bg-[#fff6f8] p-10 shadow-lg">
+              <span className="text-xs tracking-widest text-pink-600">
+                STEP 01
+              </span>
+              <h3 className="mt-4 font-serif text-xl text-gray-900">
+                Cleanse
+              </h3>
+              <p className="mt-3 text-gray-700">
+                Gently remove buildup while preserving natural moisture.
+              </p>
+            </div>
+
+            <div className="rounded-[32px] bg-[#fff3f5] p-10 shadow-lg">
+              <span className="text-xs tracking-widest text-pink-600">
+                STEP 02
+              </span>
+              <h3 className="mt-4 font-serif text-xl text-gray-900">
+                Condition
+              </h3>
+              <p className="mt-3 text-gray-700">
+                Restore softness, manageability, and everyday smoothness.
+              </p>
+            </div>
+
+            <div className="rounded-[32px] bg-[#fff7f2] p-10 shadow-lg">
+              <span className="text-xs tracking-widest text-pink-600">
+                STEP 03
+              </span>
+              <h3 className="mt-4 font-serif text-xl text-gray-900">
+                Repair
+              </h3>
+              <p className="mt-3 text-gray-700">
+                Deep treatment to strengthen and revive tired hair.
+              </p>
+            </div>
+
+            <div className="rounded-[32px] bg-[#fff5fb] p-10 shadow-lg">
+              <span className="text-xs tracking-widest text-pink-600">
+                STEP 04
+              </span>
+              <h3 className="mt-4 font-serif text-xl text-gray-900">
+                Finish
+              </h3>
+              <p className="mt-3 text-gray-700">
+                Seal shine and control frizz with lightweight care.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ================= PRODUCTS ================= */}
+      <section
+        className="relative py-40 overflow-hidden
+                  bg-gradient-to-br from-rose-100 via-pink-50 to-orange-100"
+      >
+        {/* Ambient layers */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-pink-300/35 blur-[160px]" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
+
+          {/* Intro */}
+          <div className="max-w-2xl mb-32">
+            <p className="text-xs tracking-[0.45em] uppercase text-rose-500">
+              Curated Rituals
+            </p>
+
+            <h2 className="mt-8 text-5xl md:text-6xl font-serif font-semibold text-gray-800 leading-tight">
+              Signature
+              <br />
+              Haircare Sets
+            </h2>
+
+            <p className="mt-8 text-lg text-gray-700 leading-relaxed">
+              Complete routines crafted for effortless, beautiful hair —
+              ideal for personal use and salon professionals.
+            </p>
+          </div>
+
+          {/* EQUAL CARDS GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+
+            {/* SMALL SET */}
+            <div className="rounded-[40px] bg-[#fff7f4] shadow-xl p-16 flex flex-col justify-between">
+              <div>
+                <span className="text-xs tracking-[0.4em] uppercase text-pink-500">
+                  Most Loved
+                </span>
+
+                <h3 className="mt-6 text-3xl font-serif text-gray-900">
+                  Signature Care Set — Small
+                </h3>
+
+                <p className="mt-6 text-gray-600">
+                  A complete introduction to Kera Shine — perfect for personal
+                  use and everyday care.
+                </p>
+
+                <ul className="mt-8 space-y-2 text-gray-600">
+                  <li>• Shampoo — 250ml</li>
+                  <li>• Conditioner — 250ml</li>
+                  <li>• Hair Mask — 300ml</li>
+                </ul>
+              </div>
+
+              <div className="mt-12 flex items-center justify-between">
+                <span className="text-lg font-medium text-gray-900">
+                  Complete Ritual
+                </span>
+
+                <button
+                  onClick={() =>
+                    addToCart({
+                      id: "set-small",
+                      name: "Signature Care Set — Small",
+                      price: 2500,
+                      qty: 1,
+                      type: "set",
+                    })
+                  }
+                  className="rounded-full bg-pink-600 px-10 py-4 text-white font-semibold
+                            shadow-lg hover:bg-pink-700 hover:scale-[1.04] transition"
+                >
+                  Add Set
                 </button>
               </div>
+            </div>
 
-              <div className="flex-1 overflow-y-auto p-6">
+            {/* LARGE SET */}
+            <div className="rounded-[40px] bg-[#fff5f8] shadow-xl p-16 flex flex-col justify-between">
+              <div>
+                <h3 className="text-3xl font-serif text-gray-900">
+                  Signature Care Set — Large
+                </h3>
 
-                {/* EMPTY CART */}
-                {items.length === 0 && (
-                  <p className="text-gray-500">Your cart is empty.</p>
-                )}
+                <p className="mt-6 text-gray-600">
+                  Designed for long-term use and salon-level results —
+                  ideal for professionals and loyal users.
+                </p>
 
-                {/* ================= SIGNATURE SETS ================= */}
-                {items.some(i => i.type === "set") && (
-                  <div className="mb-10">
-                    <p className="text-xs tracking-[0.35em] uppercase text-gray-400 mb-6">
-                      Curated Sets
-                    </p>
-
-                    {items
-                      .filter(i => i.type === "set")
-                      .map((item) => (
-                        <div
-                          key={item.id}
-                          className="mb-6 border border-gray-200 rounded-2xl p-6"
-                        >
-                          <h3 className="font-serif text-lg text-black">
-                            {item.name}
-                          </h3>
-
-                          <div className="mt-4 flex justify-between items-center">
-                            <span className="text-gray-600">
-                              Qty: {item.qty}
-                            </span>
-
-                            <button
-                              onClick={() => removeFromCart(item.id)}
-                              className="text-xs tracking-widest uppercase text-red-500"
-                            >
-                              Remove
-                            </button>
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-                )}
-
-                {/* ================= INDIVIDUAL PRODUCTS ================= */}
-                {items.some(i => i.type === "product") && (
-                  <div>
-                    <p className="text-xs tracking-[0.35em] uppercase text-gray-400 mb-6">
-                      Individual Products
-                    </p>
-
-                    {items
-                      .filter(i => i.type === "product")
-                      .map((item) => (
-                        <div key={item.id} className="flex gap-4 mb-6">
-                          {item.image && (
-                            <img
-                              src={item.image}
-                              alt={item.name}
-                              className="w-16 h-16 object-contain rounded-xl"
-                            />
-                          )}
-
-                          <div className="flex-1">
-                            <h4 className="font-medium text-black">
-                              {item.name}
-                            </h4>
-                            <p className="text-sm text-gray-500">
-                              Qty: {item.qty}
-                            </p>
-                          </div>
-
-                          <button
-                            onClick={() => removeFromCart(item.id)}
-                            className="text-xs text-red-500"
-                          >
-                            ✕
-                          </button>
-                        </div>
-                      ))}
-                  </div>
-                )}
-
+                <ul className="mt-8 space-y-2 text-gray-600">
+                  <li>• Shampoo — 500ml</li>
+                  <li>• Conditioner — 500ml</li>
+                  <li>• Hair Mask — 500ml</li>
+                </ul>
               </div>
 
-              <div className="p-6 border-t">
-                <div className="flex justify-between text-lg font-semibold mb-4">
-                  <span>Subtotal</span>
-                  <span>Rs. {subtotal}</span>
-                </div>
-                <Link
-                  href="/cart"
-                  onClick={() => setCartOpen(false)}
-                  className="block w-full text-center py-4 bg-black text-white rounded-full hover:bg-pink-600 transition font-medium"
+              <div className="mt-12 flex items-center justify-between">
+                <span className="text-lg font-medium text-gray-900">
+                  Advanced Ritual
+                </span>
+
+                <button
+                  onClick={() =>
+                    addToCart({
+                      id: "set-large",
+                      name: "Signature Care Set — Large",
+                      price: 4000,
+                      qty: 1,
+                      type: "set",
+                    })
+                  }
+                  className="rounded-full bg-pink-600 px-10 py-4 text-white font-semibold
+                            shadow-lg hover:bg-pink-700 hover:scale-[1.04] transition"
                 >
-                  Proceed to Checkout
-                </Link>
+                  Add Set
+                </button>
               </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ================= PRODUCTS ================= */}
+      <section id="productsindividual" className="py-28 bg-gray-50">
+        <ProductsSection />
+      </section>
 
       {/* ================= ABOUT ================= */}
       <section id="about" className="py-28 bg-white">
