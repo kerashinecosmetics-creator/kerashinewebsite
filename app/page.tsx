@@ -32,45 +32,56 @@ export default function Home() {
   return (
     <main className="bg-black text-white overflow-hidden">
       {/* ================= NAVBAR ================= */}
-      <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-white text-black shadow-md" : "bg-transparent text-white"}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex items-center justify-between">
+      <header
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-white/95 backdrop-blur text-black shadow-sm"
+            : "bg-transparent text-white"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+          
           {/* Logo */}
-          <div className="text-xl tracking-[0.35em] font-light">
+          <div className="text-lg tracking-[0.4em] font-light">
             KERA
-            <span className="ml-2 font-semibold">SHINE</span>
+            <span className="ml-2 font-semibold tracking-[0.25em]">SHINE</span>
           </div>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-14 text-xs tracking-widest uppercase">
-            <a className={`transition ${scrolled ? "text-black" : "text-white"}`} href="#home">Home</a>
-            <a className={`transition ${scrolled ? "text-black" : "text-white"}`} href="#products">Collection</a>
-            <a className={`transition ${scrolled ? "text-black" : "text-white"}`} href="#about">Story</a>
-            <a className={`transition ${scrolled ? "text-black" : "text-white"}`} href="#contact">Contact</a>
+          <nav className="hidden md:flex items-center gap-12 text-[11px] tracking-[0.35em] uppercase">
+            <a href="#products" className="hover:opacity-70 transition">
+              Shop
+            </a>
+            <a href="#products" className="hover:opacity-70 transition">
+              Products
+            </a>
+            <a href="#about" className="hover:opacity-70 transition">
+              Our Story
+            </a>
+            <a href="#contact" className="hover:opacity-70 transition">
+              Contact
+            </a>
           </nav>
 
-          {/* Right */}
+          {/* Right Actions */}
           <div className="flex items-center gap-6">
-            {/* Cart */}
             <div
               className="relative cursor-pointer"
               onClick={() => setCartOpen(true)}
             >
               <ShoppingBag className="opacity-80 hover:opacity-100 transition" />
               {items.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-pink-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                <span className="absolute -top-2 -right-2 bg-pink-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center">
                   {items.length}
                 </span>
               )}
             </div>
 
-            {/* Mobile Menu */}
             <button
-              className={`md:hidden transition ${
-                scrolled ? "text-black" : "text-white"
-              }`}
+              className="md:hidden"
               onClick={() => setIsOpen(true)}
             >
-              <Menu size={28} />
+              <Menu size={26} />
             </button>
           </div>
         </div>
@@ -118,45 +129,85 @@ export default function Home() {
       {/* ================= HERO ================= */}
       <section
         id="home"
-        className="relative h-screen w-full flex items-center justify-center text-center bg-black overflow-hidden"
+        className="relative min-h-screen w-full flex items-center bg-black overflow-hidden"
       >
-        {/* Background gradient (cinematic) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
+        {/* Background overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black/90" />
 
-        {/* Soft glow accents */}
-        <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-pink-500/20 rounded-full blur-[140px]" />
-        <div className="absolute bottom-0 -right-32 w-[500px] h-[500px] bg-rose-600/20 rounded-full blur-[140px]" />
+        {/* Glow accents */}
+        <div className="absolute top-1/3 -left-40 w-[520px] h-[520px] bg-pink-500/20 rounded-full blur-[160px]" />
+        <div className="absolute bottom-0 -right-40 w-[520px] h-[520px] bg-rose-600/20 rounded-full blur-[160px]" />
 
-        <div className="relative z-10 max-w-5xl px-6">
-          <p className="text-xs tracking-[0.5em] uppercase text-pink-400">
-            Premium Haircare
-          </p>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+          <div className="grid md:grid-cols-2 gap-14 md:gap-20 items-center">
 
-          <h1 className="mt-10 text-[clamp(3.2rem,6.5vw,6.2rem)] font-extrabold text-white leading-[1.05]">
-            Shine with
-            <br />
-            <span className="bg-gradient-to-r from-pink-400 to-rose-500 bg-clip-text text-transparent">
-              Confidence
-            </span>
-          </h1>
-          <p className="mt-8 max-w-2xl mx-auto text-lg sm:text-xl text-gray-300 leading-relaxed">
-            Salon-inspired haircare crafted to elevate your everyday ritual —
-            refined, powerful, and unapologetically elegant.
-          </p>
-          <div className="mt-14 flex justify-center gap-6 flex-wrap">
-            <a
-              href="#products"
-              className="px-10 py-4 rounded-full bg-white text-black text-sm tracking-wide font-semibold hover:bg-pink-600 hover:text-white transition"
-            >
-              Shop Collection
-            </a>
+            {/* ================= MOBILE VIDEO ================= */}
+            <div className="md:hidden w-full flex justify-center">
+              <div className="relative w-full max-w-sm h-[320px] rounded-[2rem] overflow-hidden border border-white/10 shadow-xl">
+                <video
+                  className="absolute inset-0 w-full h-full object-cover"
+                  src="/videos/kerashine-launch.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/30" />
+              </div>
+            </div>
 
-            <a
-              href="#about"
-              className="px-10 py-4 rounded-full border border-white/40 text-white text-sm tracking-wide hover:bg-white hover:text-black transition"
-            >
-              Our Story
-            </a>
+            {/* ================= LEFT CONTENT ================= */}
+            <div>
+              <p className="text-xs tracking-[0.45em] uppercase text-pink-400">
+                Professional Haircare
+              </p>
+
+              <h1 className="mt-8 text-[clamp(2.4rem,8vw,5.5rem)] font-extrabold leading-[1.05]">
+                Salon-Grade Care
+                <br />
+                <span className="bg-gradient-to-r from-pink-400 to-rose-500 bg-clip-text text-transparent">
+                  For Stronger, Shinier Hair
+                </span>
+              </h1>
+
+              <p className="mt-8 max-w-xl text-lg text-gray-300 leading-relaxed">
+                Crafted for salons and perfected for everyday use.
+                Premium formulas designed to restore, protect, and elevate every hair type.
+              </p>
+
+              {/* CTA */}
+              <div className="mt-12">
+                <a
+                  href="#products"
+                  className="inline-flex w-full md:w-auto items-center justify-center px-12 py-4 rounded-full bg-white text-black text-sm tracking-wide font-semibold hover:bg-pink-600 hover:text-white transition"
+                >
+                  Shop Hair Solutions
+                </a>
+              </div>
+
+              {/* Trust points */}
+              <div className="mt-10 flex gap-6 md:gap-8 text-xs tracking-widest uppercase text-gray-400 flex-wrap">
+                <span>Salon Approved</span>
+                <span>Unisex</span>
+                <span>All Hair Types</span>
+              </div>
+            </div>
+
+            {/* ================= DESKTOP VIDEO ================= */}
+            <div className="hidden md:flex justify-center">
+              <div className="relative w-[420px] h-[520px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl">
+                <video
+                  className="absolute inset-0 w-full h-full object-cover"
+                  src="/videos/kerashine-launch.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/20" />
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
