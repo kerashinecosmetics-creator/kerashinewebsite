@@ -5,46 +5,49 @@ import { products } from "@/lib/products";
 
 const ProductsSection = () => {
   return (
-    <section id="products" className="py-32 bg-white">
+    <section
+      id="products"
+      className="relative py-40 bg-gradient-to-b from-[#fafafa] via-white to-[#f6f6f6]"
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        
-        {/* Section Heading */}
-        <div className="mb-24 text-center">
-          <h2 className="text-5xl md:text-6xl font-serif font-semibold text-gray-900 leading-tight">
-            Our{" "}
-            <span className="bg-gradient-to-r from-pink-500 to-rose-500 bg-clip-text text-transparent">
-              Signature
-            </span>{" "}
-            Collection
+
+        {/* Intro */}
+        <div className="max-w-2xl mb-24">
+          <p className="text-xs tracking-[0.45em] uppercase text-gray-500">
+            The Collection
+          </p>
+
+          <h2 className="mt-8 text-5xl md:text-6xl font-serif font-semibold text-gray-900 leading-tight">
+            Crafted like
+            <br />
+            a signature.
           </h2>
 
-          <p className="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-600 leading-relaxed">
-            Crafted with precision, powered by nature, and designed to elevate
-            your everyday haircare ritual.
+          <p className="mt-8 text-lg text-gray-600 leading-relaxed">
+            Designed with intention. Refined through expertise.
+            Each formula is an expression of modern salon luxury.
           </p>
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
           {products.map((product) => (
-            <div
-              key={product.id}
-              className="bg-white rounded-3xl shadow-lg overflow-hidden transform transition-transform duration-300 hover:-translate-y-2"
-            >
-              <ProductCard product={product} />
-            </div>
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
 
-        {/* Optional Call-to-Action */}
-        <div className="mt-20 text-center">
+        {/* CTA */}
+        <div className="mt-32 text-center">
           <a
             href="#"
-            className="inline-block px-8 py-4 text-lg font-medium text-white bg-gradient-to-r from-pink-500 to-rose-500 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
+            className="inline-block text-xs tracking-[0.4em] uppercase
+                       border-b border-black/40 pb-2
+                       hover:border-black transition"
           >
-            Explore All Products
+            View the complete range
           </a>
         </div>
+
       </div>
     </section>
   );

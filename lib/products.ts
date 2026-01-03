@@ -99,3 +99,32 @@ export const products: Product[] = [
     bg: "from-yellow-50 to-white",
   },
 ];
+export const signatureSets = [
+  {
+    id: "set-small",
+    name: "Signature Care Set — Small",
+    price: 2500, // tum baad mein set kar sakte ho
+    image: "/sets/small-set.png", // abhi placeholder
+    qty: 1,
+    type: "set",
+    items: [
+      "Shampoo 250ml",
+      "Conditioner 250ml",
+      "Hair Mask 300ml",
+    ],
+  },
+  {
+    id: "set-large",
+    name: "Signature Care Set — Large",
+    price: 4000,
+    image: "/sets/large-set.png",
+    qty: 1,
+    type: "set",
+    items: [
+      "Shampoo 500ml",
+      "Conditioner 500ml",
+      "Hair Mask 500ml",
+    ],
+  },
+];
+

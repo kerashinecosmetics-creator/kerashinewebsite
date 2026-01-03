@@ -8,6 +8,8 @@ import AboutSection from "./AboutSection";
 import { useCart } from "@/app/context/CartContext";
 import Link from "next/link";
 import { Minus, Plus, Trash } from "lucide-react";
+import SignatureSets from "@/app/components/product/SignatureSets";
+
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false); // mobile menu
@@ -17,25 +19,40 @@ export default function Home() {
   const subtotal = items.reduce((total, item) => total + item.price * item.qty, 0);
 
   return (
-    <main className="min-h-screen bg-background text-foreground relative">
+    <main className="bg-black text-white overflow-hidden">
       {/* ================= NAVBAR ================= */}
-      <header className="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-lg z-50 shadow-md border-b border-gray-200">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <header className="fixed top-0 left-0 w-full z-50">
+        <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
           {/* Logo */}
-          <div className="text-2xl font-extrabold tracking-wide">
+          <div className="text-xl tracking-[0.35em] font-light">
             KERA
-            <span className="bg-gradient-to-r from-pink-500 to-rose-500 bg-clip-text text-transparent">
-              SHINE
-            </span>
+            <span className="ml-2 font-semibold">SHINE</span>
           </div>
 
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-14 text-xs tracking-widest uppercase">
+            <a className="opacity-80 hover:opacity-100 transition" href="#home">
+              Home
+            </a>
+            <a className="opacity-80 hover:opacity-100 transition" href="#products">
+              Collection
+            </a>
+            <a className="opacity-80 hover:opacity-100 transition" href="#about">
+              Story
+            </a>
+            <a className="opacity-80 hover:opacity-100 transition" href="#contact">
+              Contact
+            </a>
+          </nav>
+
+          {/* Right */}
           <div className="flex items-center gap-6">
             {/* Cart */}
             <div
               className="relative cursor-pointer"
               onClick={() => setCartOpen(true)}
             >
-              <ShoppingBag className="w-6 h-6 text-gray-900" />
+              <ShoppingBag className="opacity-80 hover:opacity-100 transition" />
               {items.length > 0 && (
                 <span className="absolute -top-2 -right-2 bg-pink-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
                   {items.length}
@@ -51,73 +68,101 @@ export default function Home() {
               <Menu size={28} />
             </button>
 
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex space-x-8 text-gray-800 font-medium">
-              <a href="#home" className="hover:text-pink-500">Home</a>
-              <a href="#products" className="hover:text-pink-500">Products</a>
-              <a href="#about" className="hover:text-pink-500">Story</a>
-              <a href="#contact" className="hover:text-pink-500">Contact</a>
-            </nav>
+			      {/* Mobile */}
+            <button className="md:hidden" onClick={() => setIsOpen(true)}>
+              <Menu />
+            </button>
           </div>
         </div>
       </header>
 
       {/* ================= MOBILE MENU ================= */}
-      {isOpen && (
-        <div className="fixed inset-0 z-[999]">
-          <div
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setIsOpen(false)}
-          />
-          <div className="fixed top-0 right-0 h-full w-64 bg-white shadow-lg p-6">
-            <div className="flex justify-between items-center mb-6">
-              <span className="text-xl font-bold">KERASHINE</span>
-              <button onClick={() => setIsOpen(false)}>
-                <X size={24} />
-              </button>
-            </div>
-            <nav className="flex flex-col space-y-6 text-gray-800 font-medium">
-              <a href="#home" onClick={() => setIsOpen(false)}>Home</a>
-              <a href="#products" onClick={() => setIsOpen(false)}>Products</a>
-              <a href="#about" onClick={() => setIsOpen(false)}>Story</a>
-              <a href="#contact" onClick={() => setIsOpen(false)}>Contact</a>
-            </nav>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black z-40"
+              onClick={() => setIsOpen(false)}
+            />
+
+            <motion.div
+              initial={{ y: "-100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-100%" }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+              className="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center text-center"
+            >
+              <div className="flex justify-between items-center mb-10">
+                <span className="font-bold text-xl">KERASHINE</span>
+                <button onClick={() => setIsOpen(false)}>
+                  <X size={24} />
+                </button>
+              </div>
+              <nav className="space-y-10 text-2xl tracking-widest uppercase">
+                <a href="#home">Home</a>
+                <a href="#products">Collection</a>
+                <a href="#about">Story</a>
+                <a href="#contact">Contact</a>
+              </nav>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* ================= HERO ================= */}
       <section
         id="home"
-        className="relative h-screen w-full flex items-center justify-center text-center"
+        className="relative h-screen w-full flex items-center justify-center text-center bg-black overflow-hidden"
       >
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/videos/kerashine-launch.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-        <div className="relative z-10 max-w-4xl px-4">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white">
-            Shine with{" "}
-            <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">
+        {/* Background gradient (cinematic) */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
+
+        {/* Soft glow accents */}
+        <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-pink-500/20 rounded-full blur-[140px]" />
+        <div className="absolute bottom-0 -right-32 w-[500px] h-[500px] bg-rose-600/20 rounded-full blur-[140px]" />
+
+        <div className="relative z-10 max-w-5xl px-6">
+          <p className="text-xs tracking-[0.5em] uppercase text-pink-400">
+            Premium Haircare
+          </p>
+
+          <h1 className="mt-10 text-[clamp(3.2rem,6.5vw,6.2rem)] font-extrabold text-white leading-[1.05]">
+            Shine with
+            <br />
+            <span className="bg-gradient-to-r from-pink-400 to-rose-500 bg-clip-text text-transparent">
               Confidence
             </span>
           </h1>
-          <p className="mt-6 text-lg sm:text-xl text-gray-200">
-            Premium haircare crafted for elegance, health & natural beauty.
+          <p className="mt-8 max-w-2xl mx-auto text-lg sm:text-xl text-gray-300 leading-relaxed">
+            Salon-inspired haircare crafted to elevate your everyday ritual —
+            refined, powerful, and unapologetically elegant.
           </p>
+          <div className="mt-14 flex justify-center gap-6 flex-wrap">
+            <a
+              href="#products"
+              className="px-10 py-4 rounded-full bg-white text-black text-sm tracking-wide font-semibold hover:bg-pink-600 hover:text-white transition"
+            >
+              Shop Collection
+            </a>
+
+            <a
+              href="#about"
+              className="px-10 py-4 rounded-full border border-white/40 text-white text-sm tracking-wide hover:bg-white hover:text-black transition"
+            >
+              Our Story
+            </a>
+          </div>
         </div>
       </section>
 
       {/* ================= PRODUCTS ================= */}
-      <div id="products">
+      <section id="products" className="py-28 bg-gray-50">
+        <SignatureSets />
         <ProductsSection />
-      </div>
+      </section>
 
       {/* ================= CART FLYOUT ================= */}
       <AnimatePresence>
@@ -143,54 +188,91 @@ export default function Home() {
               <div className="flex justify-between items-center p-6 border-b">
                 <h2 className="text-2xl font-semibold">Your Cart</h2>
                 <button onClick={() => setCartOpen(false)}>
-                  <X size={24} />
+                  <X size={24} className="text-black" />
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-6 space-y-6">
-                {items.length === 0 ? (
+              <div className="flex-1 overflow-y-auto p-6">
+
+                {/* EMPTY CART */}
+                {items.length === 0 && (
                   <p className="text-gray-500">Your cart is empty.</p>
-                ) : (
-                  items.map((item) => (
-                    <div key={item.id} className="flex gap-4">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-20 h-20 object-contain rounded-xl"
-                      />
-                      <div className="flex-1 flex flex-col justify-between">
-                        <div>
-                          <h3 className="font-semibold">{item.name}</h3>
-                          {item.sizes && <p className="text-gray-500 text-sm">Size: {item.sizes}</p>}
-                          <p className="font-medium text-gray-700 mt-1">
-                            Rs. {item.price * item.qty}
-                          </p>
+                )}
+
+                {/* ================= SIGNATURE SETS ================= */}
+                {items.some(i => i.type === "set") && (
+                  <div className="mb-10">
+                    <p className="text-xs tracking-[0.35em] uppercase text-gray-400 mb-6">
+                      Curated Sets
+                    </p>
+
+                    {items
+                      .filter(i => i.type === "set")
+                      .map((item) => (
+                        <div
+                          key={item.id}
+                          className="mb-6 border border-gray-200 rounded-2xl p-6"
+                        >
+                          <h3 className="font-serif text-lg text-black">
+                            {item.name}
+                          </h3>
+
+                          <div className="mt-4 flex justify-between items-center">
+                            <span className="text-gray-600">
+                              Qty: {item.qty}
+                            </span>
+
+                            <button
+                              onClick={() => removeFromCart(item.id)}
+                              className="text-xs tracking-widest uppercase text-red-500"
+                            >
+                              Remove
+                            </button>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2 mt-2">
-                          <button
-                            onClick={() => decreaseQty(item.id)}
-                            className="w-8 h-8 rounded-full border flex items-center justify-center hover:bg-gray-100 transition"
-                          >
-                            <Minus size={16} />
-                          </button>
-                          <span>{item.qty}</span>
-                          <button
-                            onClick={() => addToCart(item)}
-                            className="w-8 h-8 rounded-full border flex items-center justify-center hover:bg-gray-100 transition"
-                          >
-                            <Plus size={16} />
-                          </button>
+                      ))}
+                  </div>
+                )}
+
+                {/* ================= INDIVIDUAL PRODUCTS ================= */}
+                {items.some(i => i.type === "product") && (
+                  <div>
+                    <p className="text-xs tracking-[0.35em] uppercase text-gray-400 mb-6">
+                      Individual Products
+                    </p>
+
+                    {items
+                      .filter(i => i.type === "product")
+                      .map((item) => (
+                        <div key={item.id} className="flex gap-4 mb-6">
+                          {item.image && (
+                            <img
+                              src={item.image}
+                              alt={item.name}
+                              className="w-16 h-16 object-contain rounded-xl"
+                            />
+                          )}
+
+                          <div className="flex-1">
+                            <h4 className="font-medium text-black">
+                              {item.name}
+                            </h4>
+                            <p className="text-sm text-gray-500">
+                              Qty: {item.qty}
+                            </p>
+                          </div>
+
                           <button
                             onClick={() => removeFromCart(item.id)}
-                            className="ml-auto text-red-500 hover:text-red-600"
+                            className="text-xs text-red-500"
                           >
-                            <Trash size={18} />
+                            ✕
                           </button>
                         </div>
-                      </div>
-                    </div>
-                  ))
+                      ))}
+                  </div>
                 )}
+
               </div>
 
               <div className="p-6 border-t">
@@ -211,54 +293,32 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* ✅ About Section */}
-      <AboutSection />
+      {/* ================= ABOUT ================= */}
+      <section id="about" className="py-28 bg-white">
+        <AboutSection />
+      </section>
 
       {/* ================= CONTACT ================= */}
       <section
         id="contact"
-        className="py-24 bg-gradient-to-b from-gray-50 via-white to-gray-100"
+        className="py-32 bg-gradient-to-b from-gray-50 via-white to-gray-100"
       >
         <div className="max-w-7xl mx-auto px-6 text-center">
-          {/* Heading */}
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
+          <h2 className="text-4xl font-extrabold">
             Get in <span className="text-pink-600">Touch</span>
           </h2>
 
-          <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-            Have questions or want to know more? Reach out to us and we’ll be happy
-            to help.
+          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+            Questions, collaborations or wholesale inquiries — we’re here.
           </p>
 
-          {/* Cards */}
-          <div className="mt-16 grid gap-10 md:grid-cols-3">
-            {/* Email */}
-            <div className="bg-white rounded-2xl shadow-lg p-10 hover:shadow-xl transition">
-              <div className="text-pink-600 text-4xl mb-6">✉️</div>
-              <h3 className="text-xl font-semibold text-gray-900">Email</h3>
-              <p className="mt-3 text-gray-600">
-                kerashinecosmetics@gmail.com
-              </p>
-            </div>
-
-            {/* Phone */}
-            <div className="bg-white rounded-2xl shadow-lg p-10 hover:shadow-xl transition">
-              <div className="text-pink-600 text-4xl mb-6">📞</div>
-              <h3 className="text-xl font-semibold text-gray-900">Phone</h3>
-              <p className="mt-3 text-gray-600">+92 335 2545444</p>
-            </div>
-
-            {/* Location */}
-            <div className="bg-white rounded-2xl shadow-lg p-10 hover:shadow-xl transition">
-              <div className="text-pink-600 text-4xl mb-6">📍</div>
-              <h3 className="text-xl font-semibold text-gray-900">Location</h3>
-              <p className="mt-3 text-gray-600 leading-relaxed">
-                House, Ground Floor, Khatija Market,<br />
-                62 Blessing A, Block I,<br />
-                North Nazimabad Town, Karachi,<br />
-                75600
-              </p>
-            </div>
+          <div className="mt-20 grid gap-10 md:grid-cols-3">
+            <ContactCard title="Email" value="kerashinecosmetics@gmail.com" />
+            <ContactCard title="Phone" value="+92 335 2545444" />
+            <ContactCard
+              title="Location"
+              value="North Nazimabad Town, Karachi"
+            />
           </div>
 
           {/* Action Buttons */}
@@ -288,10 +348,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ✅ Footer */}
-      <footer className="bg-black text-gray-400 py-8 text-center">
-        <p>© {new Date().getFullYear()} KERA SHINE. All Rights Reserved.</p>
+      {/* ================= FOOTER ================= */}
+      <footer className="bg-black py-10 text-center text-gray-400">
+        © {new Date().getFullYear()} KERA SHINE — All Rights Reserved
       </footer>
     </main>
+  );
+}
+
+/* ===== Helper Components ===== */
+
+function ContactCard({ title, value }: { title: string; value: string }) {
+  return (
+    <div className="bg-white p-10 rounded-3xl shadow-lg hover:shadow-xl transition">
+      <h3 className="text-xl font-semibold">{title}</h3>
+      <p className="mt-4 text-gray-600">{value}</p>
+    </div>
+  );
+}
+
+function ActionBtn({ text, solid }: { text: string; solid?: boolean }) {
+  return (
+    <a
+      href="#"
+      className={`px-8 py-3 rounded-full font-semibold transition ${
+        solid
+          ? "bg-pink-600 text-white hover:bg-pink-700"
+          : "border-2 border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white"
+      }`}
+    >
+      {text}
+    </a>
   );
 }
