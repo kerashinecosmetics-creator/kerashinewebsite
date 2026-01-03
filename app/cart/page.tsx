@@ -59,7 +59,7 @@ Payment Method: Cash on Delivery
 `;
 
     window.open(
-      `https://wa.me/923352545419?text=${encodeURIComponent(message)}`,
+      `https://wa.me/923101425352?text=${encodeURIComponent(message)}`,
       "_blank"
     );
   };

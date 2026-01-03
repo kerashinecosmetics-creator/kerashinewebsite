@@ -865,7 +865,7 @@ export default function Home() {
             </a>
 
             <a
-              href="tel:+923352545444"
+              href="tel:+923101425352"
               className="px-10 py-4 rounded-full bg-pink-600 text-white
                         text-sm tracking-widest uppercase font-semibold
                         shadow-lg hover:bg-pink-700 hover:scale-[1.04]
