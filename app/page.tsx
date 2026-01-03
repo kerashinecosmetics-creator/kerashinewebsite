@@ -28,12 +28,12 @@ export default function Home() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  
+
   return (
     <main className="bg-black text-white overflow-hidden">
       {/* ================= NAVBAR ================= */}
       <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-white text-black shadow-md" : "bg-transparent text-white"}`}>
-        <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex items-center justify-between">
           {/* Logo */}
           <div className="text-xl tracking-[0.35em] font-light">
             KERA
@@ -65,15 +65,12 @@ export default function Home() {
 
             {/* Mobile Menu */}
             <button
-              className="text-gray-900 md:hidden"
+              className={`md:hidden transition ${
+                scrolled ? "text-black" : "text-white"
+              }`}
               onClick={() => setIsOpen(true)}
             >
               <Menu size={28} />
-            </button>
-
-			      {/* Mobile */}
-            <button className="md:hidden" onClick={() => setIsOpen(true)}>
-              <Menu />
             </button>
           </div>
         </div>
@@ -96,19 +93,22 @@ export default function Home() {
               animate={{ y: 0 }}
               exit={{ y: "-100%" }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
-              className="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center text-center"
+              className="fixed inset-0 bg-black z-50 flex flex-col"
             >
-              <div className="flex justify-between items-center mb-10">
-                <span className="font-bold text-xl">KERASHINE</span>
+              <div className="w-full flex items-center justify-between px-6 pt-6">
+                <span className="font-bold text-lg tracking-widest">
+                  KERASHINE
+                </span>
+
                 <button onClick={() => setIsOpen(false)}>
-                  <X size={24} />
+                  <X size={26} />
                 </button>
               </div>
-              <nav className="space-y-10 text-2xl tracking-widest uppercase">
-                <a href="#home">Home</a>
-                <a href="#products">Collection</a>
-                <a href="#about">Story</a>
-                <a href="#contact">Contact</a>
+              <nav className="mt-24 flex flex-col items-center gap-12 text-2xl tracking-widest uppercase">
+                <a href="#home" onClick={() => setIsOpen(false)}>Home</a>
+                <a href="#products" onClick={() => setIsOpen(false)}>Collection</a>
+                <a href="#about" onClick={() => setIsOpen(false)}>Story</a>
+                <a href="#contact" onClick={() => setIsOpen(false)}>Contact</a>
               </nav>
             </motion.div>
           </>
