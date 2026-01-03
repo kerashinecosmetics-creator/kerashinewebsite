@@ -54,3 +54,9 @@ body {
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
+.input {
+  @apply w-full rounded-full border px-5 py-3
+         text-sm outline-none
+         focus:border-pink-600 transition;
+}
+

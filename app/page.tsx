@@ -3,13 +3,12 @@
 import { useState, useEffect } from "react";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import ProductsSection from "./ProductsSection";
-import AboutSection from "./AboutSection";
 import { useCart } from "@/app/context/CartContext";
 import { Minus, Plus, Trash } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-
+import ProductCard from "@/app/components/product/ProductCard";
+import { products } from "@/lib/products";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false); // mobile menu
@@ -17,6 +16,12 @@ export default function Home() {
   const { items, addToCart, removeFromCart, decreaseQty } = useCart();
   const subtotal = items.reduce((total, item) => total + item.price * item.qty, 0);
   const [scrolled, setScrolled] = useState(false);
+
+  const videos: { src: string }[] = [
+    { src: "/about/clip1.mp4" },
+    { src: "/about/clip2.mp4" },
+    { src: "/about/clip3.mp4" },
+  ];
 
   useEffect(() => {
     const onScroll = () => {
@@ -646,50 +651,225 @@ export default function Home() {
       </section>
 
       {/* ================= PRODUCTS ================= */}
-      <section id="productsindividual" className="py-28 bg-gray-50">
-        <ProductsSection />
+      <section
+        id="products"
+        className="relative py-36 overflow-hidden
+                  bg-gradient-to-br from-rose-50 via-pink-50 to-orange-50 text-black"
+      >
+        {/* Ambient glow */}
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-pink-300/30 blur-[160px]" />
+        <div className="absolute bottom-0 -right-40 w-[500px] h-[500px] bg-rose-200/30 blur-[160px]" />
+
+        <div className="relative max-w-7xl mx-auto px-6">
+
+          {/* Heading */}
+          <div className="mb-24 text-center max-w-3xl mx-auto">
+            <p className="text-xs tracking-[0.45em] uppercase text-pink-600">
+              The Essentials
+            </p>
+
+            <h2 className="mt-8 text-5xl md:text-6xl font-serif leading-tight text-gray-900">
+              Everyday Haircare
+              <br />
+              <span className="text-pink-600">
+                Designed to Perform
+              </span>
+            </h2>
+
+            <p className="mt-8 text-lg text-gray-700 leading-relaxed">
+              Salon-grade formulas crafted for real results —
+              softness, strength, and long-lasting shine.
+            </p>
+          </div>
+
+          {/* Product Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="group relative rounded-[36px]
+                          bg-white/80 backdrop-blur-xl
+                          border border-white/60
+                          shadow-xl hover:shadow-2xl
+                          transition-all duration-300
+                          hover:-translate-y-2"
+              >
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>
+
+        </div>
       </section>
 
       {/* ================= ABOUT ================= */}
-      <section id="about" className="py-28 bg-white">
-        <AboutSection />
-      </section>
+      <section
+            id="ourstory"
+            className="relative py-28 bg-gradient-to-br from-pink-50 via-white to-pink-100 overflow-hidden"
+          >
+            {/* Decorative Background Blob */}
+            <div className="absolute -top-20 -left-20 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+            <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+      
+            <div className="relative max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-20 items-center">
+              
+              {/* Left Side – Founder Image & Quote */}
+              <motion.div
+                initial={{ opacity: 0, x: -60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="relative flex flex-col items-center"
+              >
+                <div className="relative w-full max-w-sm overflow-hidden rounded-3xl shadow-xl border-4 border-white/70">
+                  <Image
+                    src="/about/founder.png"
+                    alt="Founder"
+                    className="object-cover object-top w-full h-[420px]"
+                    width={420}      // required
+                    height={420}     // required (aprox. height)
+                  />
+                  <span className="absolute bottom-4 left-4 bg-pink-600 text-white px-5 py-2 rounded-xl text-sm font-semibold shadow-md">
+                    Founder & Visionary
+                  </span>
+                </div>
+                <p className="mt-6 italic text-gray-700 text-lg text-center max-w-md">
+                  “Beauty is not just about appearance, it&apos;s about the confidence and
+                  elegance you carry every day.”
+                </p>
+                <p className="mt-4 font-signature text-pink-600 text-2xl">— Kerashine</p>
+              </motion.div>
+      
+              {/* Right Side – Story & Floating Video Edits */}
+              <motion.div
+                initial={{ opacity: 0, x: 60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-snug">
+                  The Story of <br />
+                  <span className="text-pink-600">KERASHINE</span>
+                </h2>
+                <p className="mt-6 text-lg text-gray-700 leading-relaxed max-w-lg">
+                  What started at{" "}
+                  <span className="font-semibold text-pink-600">Umani Beauty Salon </span> 
+                  has now become a movement in haircare. With passion and expertise,
+                  our founder created a brand that empowers individuals to shine
+                  everyday — with elegance, confidence, and grace.
+                </p>
+      
+                {/* Floating Video Edits */}
+                <div className="mt-12 flex gap-6 flex-wrap">
+                  {videos.map((vid, i) => (
+                    <motion.div
+                      key={i}
+                      whileHover={{ scale: 1.05, rotate: 1 }}
+                      className="relative bg-white rounded-2xl shadow-lg overflow-hidden w-40 h-52"
+                    >
+                      <video
+                        src={vid.src}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </section>
 
       {/* ================= CONTACT ================= */}
       <section
         id="contact"
-        className="py-32 bg-gradient-to-b from-gray-50 via-white to-gray-100"
+        className="relative py-36 overflow-hidden
+                  bg-gradient-to-br from-rose-50 via-pink-50 to-orange-50"
       >
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-extrabold">
-            Get in <span className="text-pink-600">Touch</span>
-          </h2>
+        {/* Ambient glow */}
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-pink-300/30 blur-[160px]" />
+        <div className="absolute bottom-0 -right-40 w-[500px] h-[500px] bg-rose-200/30 blur-[160px]" />
 
-          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-            Questions, collaborations or wholesale inquiries — we’re here.
+        <div className="relative max-w-7xl mx-auto px-6 text-center">
+
+          {/* Heading */}
+          <p className="text-xs tracking-[0.45em] uppercase text-pink-600">
+            Contact
           </p>
 
-          <div className="mt-20 grid gap-10 md:grid-cols-3">
-            <ContactCard title="Email" value="kerashinecosmetics@gmail.com" />
-            <ContactCard title="Phone" value="+92 335 2545444" />
-            <ContactCard
-              title="Location"
-              value="North Nazimabad Town, Karachi"
-            />
+          <h2 className="mt-8 text-4xl md:text-5xl font-serif leading-tight text-gray-900">
+            Get in
+            <span className="text-pink-600"> Touch</span>
+          </h2>
+
+          <p className="mt-6 text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed">
+            Questions, collaborations or wholesale inquiries —
+            our team is always happy to assist you.
+          </p>
+
+          {/* Contact Cards */}
+          <div className="mt-24 grid gap-12 md:grid-cols-3">
+
+            <div className="group rounded-[36px] bg-white/80 backdrop-blur-xl
+                            border border-white/60 shadow-xl
+                            hover:shadow-2xl hover:-translate-y-2
+                            transition-all duration-300 p-12">
+              <h3 className="text-xl font-serif text-gray-900">
+                Email
+              </h3>
+              <p className="mt-4 text-gray-600">
+                kerashinecosmetics@gmail.com
+              </p>
+            </div>
+
+            <div className="group rounded-[36px] bg-white/80 backdrop-blur-xl
+                            border border-white/60 shadow-xl
+                            hover:shadow-2xl hover:-translate-y-2
+                            transition-all duration-300 p-12">
+              <h3 className="text-xl font-serif text-gray-900">
+                Phone
+              </h3>
+              <p className="mt-4 text-gray-600">
+                +92 335 2545444
+              </p>
+            </div>
+
+            <div className="group rounded-[36px] bg-white/80 backdrop-blur-xl
+                            border border-white/60 shadow-xl
+                            hover:shadow-2xl hover:-translate-y-2
+                            transition-all duration-300 p-12">
+              <h3 className="text-xl font-serif text-gray-900">
+                Location
+              </h3>
+              <p className="mt-4 text-gray-600">
+                North Nazimabad Town, Karachi
+              </p>
+            </div>
+
           </div>
 
           {/* Action Buttons */}
-          <div className="mt-14 flex flex-wrap justify-center gap-6">
+          <div className="mt-20 flex flex-wrap justify-center gap-6">
+
             <a
               href="mailto:kerashinecosmetics@gmail.com"
-              className="px-8 py-3 rounded-full bg-pink-600 text-white font-semibold hover:bg-pink-700 transition"
+              className="px-10 py-4 rounded-full bg-pink-600 text-white
+                        text-sm tracking-widest uppercase font-semibold
+                        shadow-lg hover:bg-pink-700 hover:scale-[1.04]
+                        transition"
             >
               Send Email
             </a>
 
             <a
               href="tel:+923352545444"
-              className="px-8 py-3 rounded-full border-2 border-pink-600 text-pink-600 font-semibold hover:bg-pink-600 hover:text-white transition"
+              className="px-10 py-4 rounded-full bg-pink-600 text-white
+                        text-sm tracking-widest uppercase font-semibold
+                        shadow-lg hover:bg-pink-700 hover:scale-[1.04]
+                        transition"
             >
               Call Now
             </a>
@@ -697,10 +877,14 @@ export default function Home() {
             <a
               href="https://maps.google.com/?q=North+Nazimabad+Town+Karachi"
               target="_blank"
-              className="px-8 py-3 rounded-full border-2 border-pink-600 text-pink-600 font-semibold hover:bg-pink-600 hover:text-white transition"
+              className="px-10 py-4 rounded-full bg-pink-600 text-white
+                        text-sm tracking-widest uppercase font-semibold
+                        shadow-lg hover:bg-pink-700 hover:scale-[1.04]
+                        transition"
             >
               Get Directions
             </a>
+
           </div>
         </div>
       </section>
