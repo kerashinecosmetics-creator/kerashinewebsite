@@ -9,6 +9,7 @@ export type CartItem = {
   name: string;
   price: number;
   image?: string;
+  sizes?: string[]; // ✅ ADD THIS
   qty: number;
   type: "product" | "set";
 };

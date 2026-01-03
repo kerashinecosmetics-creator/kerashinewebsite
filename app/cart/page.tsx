@@ -41,13 +41,14 @@ export default function CartPage() {
                 key={item.id}
                 className="flex flex-col sm:flex-row gap-6 bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition"
               >
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  width={140}
-                  height={180}
-                  className="object-contain rounded-2xl"
-                />
+                {item.image && (
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    width={140}
+                    height={180}
+                  />
+                )}
 
                 <div className="flex-1 flex flex-col justify-between">
                   <div>
