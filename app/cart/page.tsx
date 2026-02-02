@@ -91,6 +91,7 @@ Payment Method: Cash on Delivery
       {/* Exit Button */}
       <Link
         href="/"
+        title="Continue Shopping"
         className="fixed top-6 left-6 z-50 w-10 h-10 flex items-center justify-center
                    rounded-full bg-white shadow-lg hover:bg-pink-600 hover:text-white transition"
       >
@@ -112,7 +113,9 @@ Payment Method: Cash on Delivery
               {items.map((item) => (
                 <div
                   key={item.id}
-                  className="flex gap-6 bg-white/80 backdrop-blur rounded-[32px] p-6 shadow-lg"
+                  className="flex gap-6 bg-white/90 backdrop-blur
+                            rounded-[32px] p-6 shadow-lg
+                            hover:shadow-xl transition"
                 >
                   {item.image && (
                     <Image
@@ -120,7 +123,9 @@ Payment Method: Cash on Delivery
                       alt={item.name}
                       width={120}
                       height={160}
-                      className="rounded-xl"
+                       className="rounded-xl
+                       bg-gradient-to-br from-pink-50 to-rose-100
+                       p-2 shadow-inner"
                     />
                   )}
 
@@ -137,7 +142,7 @@ Payment Method: Cash on Delivery
                     <div className="mt-4 flex items-center gap-4">
                       <button
                         onClick={() => decreaseQty(item.id)}
-                        className="w-8 h-8 rounded-full border flex items-center justify-center"
+                        className="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-black hover:text-white active:scale-95 transition"
                       >
                         <Minus size={14} />
                       </button>
@@ -146,7 +151,7 @@ Payment Method: Cash on Delivery
 
                       <button
                         onClick={() => addToCart(item)}
-                        className="w-8 h-8 rounded-full border flex items-center justify-center"
+                        className="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-black hover:text-white active:scale-95 transition"
                       >
                         <Plus size={14} />
                       </button>
@@ -172,7 +177,7 @@ Payment Method: Cash on Delivery
               <div className="grid sm:grid-cols-2 gap-6">
                 <input
                   placeholder="Full Name"
-                  className="input"
+                  className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
                   value={shipping.name}
                   onChange={(e) =>
                     setShipping({ ...shipping, name: e.target.value })
@@ -181,7 +186,7 @@ Payment Method: Cash on Delivery
 
                 <input
                   placeholder="Phone Number"
-                  className="input"
+                  className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
                   value={shipping.phone}
                   onChange={(e) =>
                     setShipping({ ...shipping, phone: e.target.value })
@@ -190,7 +195,7 @@ Payment Method: Cash on Delivery
 
                 <input
                   placeholder="City"
-                  className="input"
+                  className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
                   value={shipping.city}
                   onChange={(e) =>
                     setShipping({ ...shipping, city: e.target.value })
@@ -199,7 +204,7 @@ Payment Method: Cash on Delivery
 
                 <input
                   placeholder="Postal Code"
-                  className="input"
+                  className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
                   value={shipping.postal}
                   onChange={(e) =>
                     setShipping({ ...shipping, postal: e.target.value })
@@ -223,10 +228,12 @@ Payment Method: Cash on Delivery
                 Payment Method
               </h2>
 
-              <label className="flex items-center gap-3">
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-pink-50 border border-pink-200">
                 <input type="radio" checked readOnly />
-                Cash on Delivery
-              </label>
+                <span className="text-gray-800 font-medium">
+                  Cash on Delivery
+                </span>
+              </div>
             </div>
           </div>
 
@@ -245,7 +252,10 @@ Payment Method: Cash on Delivery
               ))}
             </div>
 
-            <div className="flex justify-between text-lg font-semibold mt-6 border-t pt-4">
+            {/* 👇 ADD THIS */}
+            <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent my-6" />
+
+            <div className="flex justify-between text-lg font-semibold">
               <span>Total</span>
               <span>Rs. {subtotal.toLocaleString()}</span>
             </div>
@@ -253,7 +263,11 @@ Payment Method: Cash on Delivery
             <button
               onClick={handlePlaceOrder}
               disabled={!isShippingValid}
-              className={`mt-8 w-full rounded-full py-4 tracking-widest uppercase text-sm transition
+              className={`mt-8 w-full rounded-full py-4
+                tracking-widest uppercase text-sm
+                shadow-[0_10px_40px_rgba(0,0,0,0.25)]
+                hover:scale-[1.02]
+                transition
                 ${
                   isShippingValid
                     ? "bg-black text-white hover:bg-pink-600"

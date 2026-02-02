@@ -7,8 +7,8 @@ import { useCart } from "@/app/context/CartContext";
 import { Minus, Plus, Trash } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import ProductCard from "@/app/components/product/ProductCard";
 import { products } from "@/lib/products";
+import { signatureSets, type SignatureSet } from "../lib/products";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false); // mobile menu
@@ -33,7 +33,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-black text-white overflow-hidden">
+    <main className="bg-black text-white overflow-x-hidden">
       {/* ================= NAVBAR ================= */}
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-out ${
@@ -45,10 +45,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           
           {/* Logo */}
-          <div className="text-lg tracking-[0.4em] font-light">
+          <Link href="/" className="group text-lg tracking-[0.4em] font-light">
             KERA
-            <span className="ml-2 font-semibold tracking-[0.25em]">SHINE</span>
-          </div>
+            <span className="ml-2 font-semibold tracking-[0.25em] group-hover:text-pink-600 transition">
+              SHINE
+            </span>
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-12 text-[11px] tracking-[0.35em] uppercase">
@@ -198,7 +200,9 @@ export default function Home() {
                       className="flex gap-4 border-b pb-6 last:border-none"
                     >
                       {/* Image */}
-                      <div className="relative w-20 h-20 rounded-md overflow-hidden bg-gray-100">
+                      <div className="relative w-20 h-20 rounded-xl overflow-hidden 
+                      bg-gradient-to-br from-pink-50 to-rose-100
+                      shadow-inner">
                         {item.image && (
                           <Image
                             src={item.image}
@@ -222,7 +226,10 @@ export default function Home() {
                         <div className="flex items-center gap-4 mt-3">
                           <button
                             onClick={() => decreaseQty(item.id)}
-                            className="w-7 h-7 flex items-center justify-center border rounded-full text-black hover:bg-black hover:text-white transition"
+                            className="w-8 h-8 flex items-center justify-center 
+                            rounded-full bg-white shadow-md
+                            text-black hover:bg-black hover:text-white 
+                            active:scale-95 transition"
                           >
                             <Minus size={14} />
                           </button>
@@ -233,7 +240,10 @@ export default function Home() {
 
                           <button
                             onClick={() => addToCart(item)}
-                            className="w-7 h-7 flex items-center justify-center border rounded-full text-black hover:bg-black hover:text-white transition"
+                            className="w-8 h-8 flex items-center justify-center 
+                            rounded-full bg-white shadow-md
+                            text-black hover:bg-black hover:text-white 
+                            active:scale-95 transition"
                           >
                             <Plus size={14} />
                           </button>
@@ -329,7 +339,11 @@ export default function Home() {
               <div className="mt-12">
                 <a
                   href="#products"
-                  className="inline-flex w-full md:w-auto items-center justify-center px-12 py-4 rounded-full bg-white text-black text-sm tracking-wide font-semibold hover:bg-pink-600 hover:text-white transition"
+                  className="relative inline-flex w-full md:w-auto items-center justify-center
+                  px-12 py-4 rounded-full bg-white text-black
+                  shadow-[0_0_40px_rgba(236,72,153,0.35)]
+                  hover:bg-pink-600 hover:text-white
+                  transition"
                 >
                   Shop Hair Solutions
                 </a>
@@ -364,7 +378,7 @@ export default function Home() {
 
       {/* ================= WHY SECTION ================= */}
       <section id="products"
-        className="relative py-36 overflow-hidden
+        className="relative py-28 md:py-40 overflow-hidden
                   bg-gradient-to-br from-pink-100 via-rose-100 to-orange-100"
       >
         {/* Ambient glow */}
@@ -524,197 +538,329 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* ================= PRODUCTS ================= */}
+      
+      {/* ================= SIGNATURE SETS (VIP EDITION) ================= */}
       <section
-        className="relative py-40 overflow-hidden
-                  bg-gradient-to-br from-rose-100 via-pink-50 to-orange-100"
+        className="relative py-28 sm:py-28 md:py-40 lg:py-48 overflow-hidden
+                  bg-gradient-to-br from-[#fff1f4] via-[#ffe8ef] to-[#fff6ec]"
       >
-        {/* Ambient layers */}
+        {/* Luxury ambient layers */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-pink-300/35 blur-[160px]" />
+          <div className="absolute -top-40 left-1/2 -translate-x-1/2
+                          w-[700px] sm:w-[1000px] h-[400px] sm:h-[500px]
+                          bg-pink-300/40 blur-[180px] sm:blur-[200px]" />
+          <div className="absolute bottom-0 -right-40
+                          w-[400px] sm:w-[600px] h-[400px] sm:h-[600px]
+                          bg-rose-200/40 blur-[180px] sm:blur-[200px]" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-12">
 
-          {/* Intro */}
-          <div className="max-w-2xl mb-32">
-            <p className="text-xs tracking-[0.45em] uppercase text-rose-500">
+          {/* INTRO */}
+          <div className="max-w-3xl mb-24 sm:mb-32 lg:mb-40">
+            <p className="text-xs tracking-[0.35em] sm:tracking-[0.5em]
+                          uppercase text-pink-600">
               Curated Rituals
             </p>
 
-            <h2 className="mt-8 text-5xl md:text-6xl font-serif font-semibold text-gray-800 leading-tight">
+            <h2 className="mt-6 sm:mt-10
+                          text-4xl sm:text-5xl md:text-6xl lg:text-7xl
+                          font-serif font-semibold text-gray-900 leading-tight">
               Signature
               <br />
               Haircare Sets
             </h2>
 
-            <p className="mt-8 text-lg text-gray-700 leading-relaxed">
-              Complete routines crafted for effortless, beautiful hair —
-              ideal for personal use and salon professionals.
+            <p className="mt-6 sm:mt-10
+                          text-base sm:text-lg md:text-xl
+                          text-gray-700 leading-relaxed max-w-2xl">
+              Thoughtfully composed salon-grade rituals — designed for those
+              who expect more than just haircare.
             </p>
           </div>
 
-          {/* EQUAL CARDS GRID */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          {/* SETS */}
+          <div className="space-y-24 sm:space-y-32 lg:space-y-40">
 
-            {/* SMALL SET */}
-            <div className="rounded-[40px] bg-[#fff7f4] shadow-xl p-16 flex flex-col justify-between">
-              <div>
-                <span className="text-xs tracking-[0.4em] uppercase text-pink-500">
-                  Most Loved
+            {signatureSets.map((set: SignatureSet, index: number) => (
+              <div
+                key={set.id}
+                className="relative grid grid-cols-1 lg:grid-cols-2
+                          items-center gap-14 sm:gap-20 lg:gap-24
+                          rounded-[36px] sm:rounded-[44px] lg:rounded-[56px]
+                          bg-white/80 backdrop-blur-2xl
+                          shadow-[0_30px_90px_rgba(0,0,0,0.12)]
+                          p-6 sm:p-10 lg:p-24"
+              >
+                {/* Floating index */}
+                <span className="absolute -top-6 -left-4 sm:-top-8 sm:-left-8
+                                text-[72px] sm:text-[96px] lg:text-[120px]
+                                font-serif text-pink-200/40 select-none">
+                  {index + 1}
                 </span>
 
-                <h3 className="mt-6 text-3xl font-serif text-gray-900">
-                  Signature Care Set — Small
-                </h3>
+                {/* IMAGE */}
+                <div className="relative flex flex-col items-center gap-4">
 
-                <p className="mt-6 text-gray-600">
-                  A complete introduction to Kera Shine — perfect for personal
-                  use and everyday care.
-                </p>
+                  {/* Badge — image se upar */}
+                  <span className="inline-block bg-black/80 text-white
+                                  text-[10px] tracking-widest px-3 py-1 rounded-full">
+                    SIGNATURE SET
+                  </span>
 
-                <ul className="mt-8 space-y-2 text-gray-600">
-                  <li>• Shampoo — 250ml</li>
-                  <li>• Conditioner — 250ml</li>
-                  <li>• Hair Mask — 300ml</li>
-                </ul>
+                  {/* Image */}
+                  <div className="relative flex justify-center">
+                    <Image
+                      src={set.image}
+                      alt={set.name}
+                      width={520}
+                      height={520}
+                      className="object-contain
+                                max-w-[220px] sm:max-w-[320px] lg:max-w-none
+                                drop-shadow-[0_40px_70px_rgba(0,0,0,0.25)]
+                                transition duration-700"
+                    />
+                  </div>
+                </div>
+
+                {/* CONTENT */}
+                <div>
+                  {set.id === "set-small" && (
+                    <span className="inline-block mb-6
+                                    text-[10px] sm:text-xs
+                                    tracking-[0.35em] sm:tracking-[0.45em]
+                                    uppercase text-pink-600">
+                      Most Loved
+                    </span>
+                  )}
+
+                  <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+                                font-serif text-gray-900">
+                    {set.name}
+                  </h3>
+
+                  <p className="mt-6 sm:mt-8 lg:mt-10
+                                text-base sm:text-lg lg:text-xl
+                                text-gray-600 leading-relaxed max-w-xl">
+                    {set.id === "set-small"
+                      ? "A refined introduction to Kera Shine — effortless daily luxury."
+                      : "A complete professional-grade ritual for long-term transformation."}
+                  </p>
+
+                  <ul className="mt-8 sm:mt-10 lg:mt-12
+                                space-y-2 sm:space-y-3
+                                text-sm sm:text-base lg:text-lg
+                                text-gray-700">
+                    {set.items.map((item: string) => (
+                      <li key={item}>— {item}</li>
+                    ))}
+                  </ul>
+
+                  {/* PRICE + BUTTON */}
+                  <div className="mt-10 sm:mt-12 lg:mt-16
+                                  flex flex-col sm:flex-row
+                                  sm:items-center gap-6 sm:gap-10">
+                    <span className="text-2xl sm:text-3xl
+                                    font-semibold text-gray-900">
+                      PKR {set.price}
+                    </span>
+
+                    <button
+                      onClick={() =>
+                        addToCart({
+                          id: set.id,
+                          name: set.name,
+                          price: set.price,
+                          image: set.image,
+                          qty: 1,
+                          type: "set",
+                        })
+                      }
+                      className="
+                        w-full sm:w-auto
+                        rounded-full bg-black
+                        px-8 sm:px-12 lg:px-16
+                        py-3 sm:py-4 lg:py-5
+                        text-[11px] sm:text-xs text-white
+                        tracking-wider sm:tracking-widest
+                        uppercase font-semibold
+                        shadow-xl
+                        hover:bg-pink-600 hover:scale-[1.05]
+                        transition duration-300
+                      "
+                    >
+                      Add Ritual
+                    </button>
+                  </div>
+                </div>
               </div>
-
-              <div className="mt-12 flex items-center justify-between">
-                <span className="text-lg font-medium text-gray-900">
-                  Complete Ritual
-                </span>
-
-                <button
-                  onClick={() =>
-                    addToCart({
-                      id: "set-small",
-                      name: "Signature Care Set — Small",
-                      price: 2500,
-                      qty: 1,
-                      type: "set",
-                    })
-                  }
-                  className="rounded-full bg-pink-600 px-10 py-4 text-white font-semibold
-                            shadow-lg hover:bg-pink-700 hover:scale-[1.04] transition"
-                >
-                  Add Set
-                </button>
-              </div>
-            </div>
-
-            {/* LARGE SET */}
-            <div className="rounded-[40px] bg-[#fff5f8] shadow-xl p-16 flex flex-col justify-between">
-              <div>
-                <h3 className="text-3xl font-serif text-gray-900">
-                  Signature Care Set — Large
-                </h3>
-
-                <p className="mt-6 text-gray-600">
-                  Designed for long-term use and salon-level results —
-                  ideal for professionals and loyal users.
-                </p>
-
-                <ul className="mt-8 space-y-2 text-gray-600">
-                  <li>• Shampoo — 500ml</li>
-                  <li>• Conditioner — 500ml</li>
-                  <li>• Hair Mask — 500ml</li>
-                </ul>
-              </div>
-
-              <div className="mt-12 flex items-center justify-between">
-                <span className="text-lg font-medium text-gray-900">
-                  Advanced Ritual
-                </span>
-
-                <button
-                  onClick={() =>
-                    addToCart({
-                      id: "set-large",
-                      name: "Signature Care Set — Large",
-                      price: 4000,
-                      qty: 1,
-                      type: "set",
-                    })
-                  }
-                  className="rounded-full bg-pink-600 px-10 py-4 text-white font-semibold
-                            shadow-lg hover:bg-pink-700 hover:scale-[1.04] transition"
-                >
-                  Add Set
-                </button>
-              </div>
-            </div>
+            ))}
 
           </div>
         </div>
       </section>
 
-      {/* ================= PRODUCTS ================= */}
+      {/* ================= PRODUCTS — VIP CAROUSEL ================= */}
       <section
         id="products"
-        className="relative py-36 overflow-hidden
-                  bg-gradient-to-br from-rose-50 via-pink-50 to-orange-50 text-black"
+        className="relative py-48 overflow-hidden
+                  bg-gradient-to-br from-[#fff3f6] via-[#fff7fb] to-[#fff1ea]"
       >
-        {/* Ambient glow */}
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-pink-300/30 blur-[160px]" />
-        <div className="absolute bottom-0 -right-40 w-[500px] h-[500px] bg-rose-200/30 blur-[160px]" />
+        {/* Ambient luxury glows */}
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-pink-300/30 blur-[200px]" />
+        <div className="absolute bottom-0 -right-40 w-[600px] h-[600px] bg-rose-200/30 blur-[200px]" />
 
-        <div className="relative max-w-7xl mx-auto px-6">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
 
-          {/* Heading */}
-          <div className="mb-24 text-center max-w-3xl mx-auto">
-            <p className="text-xs tracking-[0.45em] uppercase text-pink-600">
+          {/* INTRO */}
+          <div className="mb-36 text-center max-w-4xl mx-auto">
+            <p className="text-xs tracking-[0.5em] uppercase text-pink-600">
               The Essentials
             </p>
 
-            <h2 className="mt-8 text-5xl md:text-6xl font-serif leading-tight text-gray-900">
+            <h2 className="mt-10 text-6xl md:text-7xl font-serif leading-tight text-gray-900">
               Everyday Haircare
               <br />
-              <span className="text-pink-600">
-                Designed to Perform
-              </span>
+              <span className="text-pink-600">Designed to Perform</span>
             </h2>
 
-            <p className="mt-8 text-lg text-gray-700 leading-relaxed">
-              Salon-grade formulas crafted for real results —
-              softness, strength, and long-lasting shine.
+            <p className="mt-10 text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto">
+              Professional-grade formulas crafted for visible results — strength,
+              softness, and long-lasting shine.
             </p>
           </div>
 
-          {/* Product Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="group relative rounded-[36px]
-                          bg-white/80 backdrop-blur-xl
-                          border border-white/60
-                          shadow-xl hover:shadow-2xl
-                          transition-all duration-300
-                          hover:-translate-y-2"
-              >
-                <ProductCard product={product} />
-              </div>
-            ))}
-          </div>
+          {/* 👇 ADD THIS (mobile only hint) */}
+          <p className="md:hidden text-center text-xs tracking-widest uppercase text-gray-500 mb-6">
+            Swipe to explore →
+          </p>
 
+          {/* ================= CAROUSEL WRAPPER ================= */}
+          <div className="relative">
+
+            {/* LEFT ARROW */}
+            <button
+              onClick={() =>
+                document.getElementById("product-carousel")?.scrollBy({
+                  left: -380,
+                  behavior: "smooth",
+                })
+              }
+              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-20
+                        w-14 h-14 rounded-full bg-white/80 backdrop-blur
+                        shadow-lg border border-black/10
+                        items-center justify-center
+                        hover:bg-black hover:text-white transition"
+            >
+              ←
+            </button>
+
+            {/* RIGHT ARROW */}
+            <button
+              onClick={() =>
+                document.getElementById("product-carousel")?.scrollBy({
+                  left: 380,
+                  behavior: "smooth",
+                })
+              }
+              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-20
+                        w-14 h-14 rounded-full bg-white/80 backdrop-blur
+                        shadow-lg border border-black/10
+                        items-center justify-center
+                        hover:bg-black hover:text-white transition"
+            >
+              →
+            </button>
+
+            {/* ================= PRODUCT STRIP ================= */}
+            <div
+              id="product-carousel"
+              className="flex gap-20 overflow-x-auto scroll-smooth
+                        no-scrollbar px-20"
+            >
+              {products.map((product) => (
+                <div
+                  key={product.id}
+                  className="min-w-[340px] max-w-[340px]
+                            group relative rounded-[44px] overflow-hidden
+                            bg-white/85 backdrop-blur-2xl
+                            shadow-[0_30px_80px_rgba(0,0,0,0.12)]
+                            transition-all duration-500
+                            hover:-translate-y-4"
+                >
+                  {/* Gradient glow */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${product.bg}
+                                opacity-50 group-hover:opacity-80 transition`}
+                  />
+
+                  {/* Image */}
+                  <div className="relative h-[320px] flex items-center justify-center">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      width={220}
+                      height={220}
+                      className="object-contain
+                                drop-shadow-[0_40px_70px_rgba(0,0,0,0.25)]
+                                group-hover:scale-[1.12]
+                                transition duration-700"
+                    />
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative px-8 pb-12 text-center">
+                    <h3 className="text-2xl font-serif text-gray-900">
+                      {product.name}
+                    </h3>
+
+                    <p className="mt-3 text-sm text-gray-600 leading-relaxed">
+                      {product.description}
+                    </p>
+
+                    <span className="block mt-5 text-lg font-semibold text-gray-900">
+                      PKR {product.price}
+                    </span>
+
+                    <button
+                      onClick={() =>
+                        addToCart({
+                          id: product.id,
+                          name: product.name,
+                          price: product.price,
+                          image: product.image,
+                          qty: 1,
+                          type: "product",
+                        })
+                      }
+                      className="mt-6 w-full rounded-full bg-black text-white
+                                py-4 text-xs tracking-widest uppercase font-semibold
+                                shadow-lg hover:bg-pink-600 transition"
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
         </div>
       </section>
 
       {/* ================= ABOUT ================= */}
       <section
-            id="ourstory"
-            className="relative py-28 bg-gradient-to-br from-pink-50 via-white to-pink-100 overflow-hidden"
-          >
-            {/* Decorative Background Blob */}
-            <div className="absolute -top-20 -left-20 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-            <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
-      
-            <div className="relative max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-20 items-center">
-              
-              {/* Left Side – Founder Image & Quote */}
-              <motion.div
+      id="ourstory"
+      className="relative py-28 bg-gradient-to-br from-pink-50 via-white to-pink-100 overflow-hidden"
+      >
+        {/* Decorative Background Blob */}
+        <div className="absolute -top-20 -left-20 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+        
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-20 items-center">
+          
+          {/* Left Side – Founder Image & Quote */}
+          <motion.div
                 initial={{ opacity: 0, x: -60 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
@@ -781,12 +927,12 @@ export default function Home() {
                 </div>
               </motion.div>
             </div>
-          </section>
+      </section>
 
       {/* ================= CONTACT ================= */}
       <section
         id="contact"
-        className="relative py-36 overflow-hidden
+        className="relative py-28 md:py-40 overflow-hidden
                   bg-gradient-to-br from-rose-50 via-pink-50 to-orange-50"
       >
         {/* Ambient glow */}
@@ -890,8 +1036,11 @@ export default function Home() {
       </section>
 
       {/* ================= FOOTER ================= */}
-      <footer className="bg-black py-10 text-center text-gray-400">
-        © {new Date().getFullYear()} KERA SHINE — All Rights Reserved
+      <footer className="bg-black py-14 text-center text-gray-400 text-sm tracking-widest">
+        <p>KERA SHINE — Salon Grade Haircare</p>
+        <p className="mt-2 text-xs opacity-60">
+          © 2021 All Rights Reserved
+        </p>
       </footer>
     </main>
   );
