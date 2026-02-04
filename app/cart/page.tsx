@@ -9,7 +9,6 @@ import { useCart } from "@/app/context/CartContext";
 export default function CartPage() {
   const { items, addToCart, removeFromCart, decreaseQty } = useCart();
 
-  /* ================= SHIPPING STATE ================= */
   const [shipping, setShipping] = useState({
     name: "",
     phone: "",
@@ -30,7 +29,6 @@ export default function CartPage() {
     0
   );
 
-  /* ================= PLACE ORDER (WHATSAPP) ================= */
   const handlePlaceOrder = () => {
     if (!isShippingValid) return;
 
@@ -64,19 +62,18 @@ Payment Method: Cash on Delivery
     );
   };
 
-  /* ================= EMPTY CART ================= */
   if (items.length === 0) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-br from-rose-50 via-pink-50 to-orange-50">
+      <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-[#fafafa]">
         <h2 className="text-3xl font-serif mb-4 text-gray-900">
           Your cart is empty
         </h2>
         <p className="text-gray-600 mb-6">
-          Looks like you haven&apos;t added anything yet.
+          You haven&apos;t added any products yet.
         </p>
         <Link
           href="/"
-          className="rounded-full bg-black px-10 py-4 text-white tracking-widest uppercase text-sm hover:bg-pink-600 transition"
+          className="rounded-full bg-black px-10 py-4 text-white tracking-widest uppercase text-sm hover:bg-gray-900 transition"
         >
           Continue Shopping
         </Link>
@@ -84,16 +81,13 @@ Payment Method: Cash on Delivery
     );
   }
 
-  /* ================= PAGE ================= */
   return (
-    <div className="min-h-screen pt-28 px-6 bg-gradient-to-br from-rose-50 via-pink-50 to-orange-50">
-
-      {/* Exit Button */}
+    <div className="min-h-screen bg-[#fafafa] pt-28 px-6">
+      {/* Exit */}
       <Link
         href="/"
-        title="Continue Shopping"
         className="fixed top-6 left-6 z-50 w-10 h-10 flex items-center justify-center
-                   rounded-full bg-white shadow-lg hover:bg-pink-600 hover:text-white transition"
+                   rounded-full bg-white border border-gray-200 hover:bg-black hover:text-white transition"
       >
         <X size={18} />
       </Link>
@@ -105,115 +99,93 @@ Payment Method: Cash on Delivery
 
         <div className="grid lg:grid-cols-3 gap-12">
 
-          {/* LEFT SIDE */}
-          <div className="lg:col-span-2 space-y-12">
+          {/* LEFT */}
+          <div className="lg:col-span-2 space-y-10">
 
-            {/* Cart Items */}
-            <div className="space-y-6">
-              {items.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex gap-6 bg-white/90 backdrop-blur
-                            rounded-[32px] p-6 shadow-lg
-                            hover:shadow-xl transition"
-                >
-                  {item.image && (
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      width={120}
-                      height={160}
-                       className="rounded-xl
-                       bg-gradient-to-br from-pink-50 to-rose-100
-                       p-2 shadow-inner"
-                    />
-                  )}
+            {/* CART ITEMS */}
+            {items.map((item) => (
+              <div
+                key={item.id}
+                className="flex gap-6 bg-white border border-gray-200
+                           rounded-2xl p-6 shadow-sm"
+              >
+                {item.image && (
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    width={110}
+                    height={140}
+                    className="rounded-lg bg-gray-100 p-2"
+                  />
+                )}
 
-                  <div className="flex-1 flex flex-col justify-between">
-                    <div>
-                      <h3 className="text-lg font-medium text-gray-900">
-                        {item.name}
-                      </h3>
-                      <p className="text-gray-600 mt-1">
-                        Rs. {item.price.toLocaleString()}
-                      </p>
-                    </div>
+                <div className="flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-900">
+                      {item.name}
+                    </h3>
+                    <p className="text-gray-600 mt-1">
+                      Rs. {item.price.toLocaleString()}
+                    </p>
+                  </div>
 
-                    <div className="mt-4 flex items-center gap-4">
-                      <button
-                        onClick={() => decreaseQty(item.id)}
-                        className="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-black hover:text-white active:scale-95 transition"
-                      >
-                        <Minus size={14} />
-                      </button>
+                  <div className="mt-4 flex items-center gap-4">
+                    <button
+                      onClick={() => decreaseQty(item.id)}
+                      className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
+                    >
+                      <Minus size={14} />
+                    </button>
 
-                      <span>{item.qty}</span>
+                    <span className="text-sm">{item.qty}</span>
 
-                      <button
-                        onClick={() => addToCart(item)}
-                        className="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-black hover:text-white active:scale-95 transition"
-                      >
-                        <Plus size={14} />
-                      </button>
+                    <button
+                      onClick={() => addToCart(item)}
+                      className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
+                    >
+                      <Plus size={14} />
+                    </button>
 
-                      <button
-                        onClick={() => removeFromCart(item.id)}
-                        className="ml-auto text-gray-400 hover:text-pink-600"
-                      >
-                        <Trash size={16} />
-                      </button>
-                    </div>
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="ml-auto text-gray-400 hover:text-red-500"
+                    >
+                      <Trash size={16} />
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
 
-            {/* Shipping Details */}
-            <div className="bg-white/80 backdrop-blur rounded-[32px] p-8 shadow-lg">
+            {/* SHIPPING */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
               <h2 className="text-2xl font-serif text-gray-900 mb-6">
                 Shipping Details
               </h2>
 
               <div className="grid sm:grid-cols-2 gap-6">
-                <input
-                  placeholder="Full Name"
-                  className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
-                  value={shipping.name}
-                  onChange={(e) =>
-                    setShipping({ ...shipping, name: e.target.value })
-                  }
-                />
-
-                <input
-                  placeholder="Phone Number"
-                  className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
-                  value={shipping.phone}
-                  onChange={(e) =>
-                    setShipping({ ...shipping, phone: e.target.value })
-                  }
-                />
-
-                <input
-                  placeholder="City"
-                  className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
-                  value={shipping.city}
-                  onChange={(e) =>
-                    setShipping({ ...shipping, city: e.target.value })
-                  }
-                />
-
-                <input
-                  placeholder="Postal Code"
-                  className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
-                  value={shipping.postal}
-                  onChange={(e) =>
-                    setShipping({ ...shipping, postal: e.target.value })
-                  }
-                />
+                {[
+                  ["Full Name", "name"],
+                  ["Phone Number", "phone"],
+                  ["City", "city"],
+                  ["Postal Code", "postal"],
+                ].map(([label, key]) => (
+                  <input
+                    key={key}
+                    placeholder={label}
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm
+                               focus:outline-none focus:ring-1 focus:ring-black"
+                    value={(shipping as any)[key]}
+                    onChange={(e) =>
+                      setShipping({ ...shipping, [key]: e.target.value })
+                    }
+                  />
+                ))}
 
                 <input
                   placeholder="Full Address"
-                  className="input sm:col-span-2"
+                  className="sm:col-span-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm
+                             focus:outline-none focus:ring-1 focus:ring-black"
                   value={shipping.address}
                   onChange={(e) =>
                     setShipping({ ...shipping, address: e.target.value })
@@ -222,13 +194,13 @@ Payment Method: Cash on Delivery
               </div>
             </div>
 
-            {/* Payment */}
-            <div className="bg-white/80 backdrop-blur rounded-[32px] p-8 shadow-lg">
+            {/* PAYMENT */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
               <h2 className="text-2xl font-serif text-gray-900 mb-6">
                 Payment Method
               </h2>
 
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-pink-50 border border-pink-200">
+              <div className="flex items-center gap-3 p-4 border rounded-lg">
                 <input type="radio" checked readOnly />
                 <span className="text-gray-800 font-medium">
                   Cash on Delivery
@@ -237,8 +209,8 @@ Payment Method: Cash on Delivery
             </div>
           </div>
 
-          {/* ORDER SUMMARY */}
-          <div className="bg-white/90 backdrop-blur rounded-[32px] p-8 shadow-xl h-fit sticky top-32">
+          {/* SUMMARY */}
+          <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-md h-fit sticky top-32">
             <h2 className="text-2xl font-serif mb-6 text-gray-900">
               Order Summary
             </h2>
@@ -252,8 +224,7 @@ Payment Method: Cash on Delivery
               ))}
             </div>
 
-            {/* 👇 ADD THIS */}
-            <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent my-6" />
+            <div className="h-px bg-gray-200 my-6" />
 
             <div className="flex justify-between text-lg font-semibold">
               <span>Total</span>
@@ -263,14 +234,10 @@ Payment Method: Cash on Delivery
             <button
               onClick={handlePlaceOrder}
               disabled={!isShippingValid}
-              className={`mt-8 w-full rounded-full py-4
-                tracking-widest uppercase text-sm
-                shadow-[0_10px_40px_rgba(0,0,0,0.25)]
-                hover:scale-[1.02]
-                transition
+              className={`mt-8 w-full rounded-full py-4 text-sm tracking-widest uppercase transition
                 ${
                   isShippingValid
-                    ? "bg-black text-white hover:bg-pink-600"
+                    ? "bg-black text-white hover:bg-gray-900"
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
             >
@@ -279,7 +246,7 @@ Payment Method: Cash on Delivery
 
             {!isShippingValid && (
               <p className="mt-3 text-xs text-gray-500 text-center">
-                Please complete all shipping details to place your order
+                Complete shipping details to continue
               </p>
             )}
 

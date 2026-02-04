@@ -38,14 +38,14 @@ export default function Home() {
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-out ${
           scrolled
-            ? "bg-white/95 backdrop-blur-md text-black shadow-[0_4px_30px_rgba(0,0,0,0.05)]"
-            : "bg-transparent text-white"
+          ? "bg-white text-black shadow-sm"
+          : "bg-transparent text-white"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           
           {/* Logo */}
-          <Link href="/" className="group text-lg tracking-[0.4em] font-light">
+          <Link href="/" className="group text-lg tracking-[0.25em] font-light">
             KERA
             <span className="ml-2 font-semibold tracking-[0.25em] group-hover:text-pink-600 transition">
               SHINE
@@ -79,7 +79,7 @@ export default function Home() {
               className="relative cursor-pointer"
               onClick={() => setCartOpen(true)}
             >
-              <ShoppingBag className="opacity-80 hover:opacity-100 transition" />
+              <ShoppingBag className="opacity-70 hover:opacity-100 transition" />
               {items.length > 0 && (
                 <span className="absolute -top-2 -right-2 bg-pink-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center">
                   {items.length}
@@ -179,7 +179,7 @@ export default function Home() {
             >
               {/* Header */}
               <div className="flex items-center justify-between px-6 py-6 border-b">
-                <h2 className="text-xs tracking-[0.35em] uppercase text-black">
+                <h2 className="text-xs tracking-[0.3em] uppercase text-gray-800">
                   Your Cart
                 </h2>
                 <button onClick={() => setCartOpen(false)}>
@@ -200,9 +200,7 @@ export default function Home() {
                       className="flex gap-4 border-b pb-6 last:border-none"
                     >
                       {/* Image */}
-                      <div className="relative w-20 h-20 rounded-xl overflow-hidden 
-                      bg-gradient-to-br from-pink-50 to-rose-100
-                      shadow-inner">
+                      <div className="relative w-20 h-20 rounded-lg overflow-hidden bg-gray-100">
                         {item.image && (
                           <Image
                             src={item.image}
@@ -227,8 +225,8 @@ export default function Home() {
                           <button
                             onClick={() => decreaseQty(item.id)}
                             className="w-8 h-8 flex items-center justify-center 
-                            rounded-full bg-white shadow-md
-                            text-black hover:bg-black hover:text-white 
+                            rounded-full bg-gray-100
+                            text-black hover:bg-gray-200
                             active:scale-95 transition"
                           >
                             <Minus size={14} />
@@ -241,8 +239,8 @@ export default function Home() {
                           <button
                             onClick={() => addToCart(item)}
                             className="w-8 h-8 flex items-center justify-center 
-                            rounded-full bg-white shadow-md
-                            text-black hover:bg-black hover:text-white 
+                            rounded-full bg-gray-100
+                            text-black hover:bg-gray-20
                             active:scale-95 transition"
                           >
                             <Plus size={14} />
@@ -850,83 +848,70 @@ export default function Home() {
 
       {/* ================= ABOUT ================= */}
       <section
-      id="ourstory"
-      className="relative py-28 bg-gradient-to-br from-pink-50 via-white to-pink-100 overflow-hidden"
+        id="ourstory"
+        className="relative py-28 bg-gradient-to-br from-pink-50 via-white to-pink-100 overflow-hidden"
       >
-        {/* Decorative Background Blob */}
-        <div className="absolute -top-20 -left-20 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
-        
+        {/* Decorative blobs (same vibe, thore subtle) */}
+        <div className="absolute -top-20 -left-20 w-96 h-96 bg-pink-200/30 rounded-full blur-3xl opacity-30"></div>
+        <div className="absolute bottom-0 right-0 w-[420px] h-[420px] bg-pink-100/40 rounded-full blur-3xl opacity-40"></div>
+
         <div className="relative max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-20 items-center">
-          
-          {/* Left Side – Founder Image & Quote */}
+
+          {/* LEFT — STORY */}
           <motion.div
-                initial={{ opacity: 0, x: -60 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                className="relative flex flex-col items-center"
-              >
-                <div className="relative w-full max-w-sm overflow-hidden rounded-3xl shadow-xl border-4 border-white/70">
-                  <Image
-                    src="/about/founder.png"
-                    alt="Founder"
-                    className="object-cover object-top w-full h-[420px]"
-                    width={420}      // required
-                    height={420}     // required (aprox. height)
-                  />
-                  <span className="absolute bottom-4 left-4 bg-pink-600 text-white px-5 py-2 rounded-xl text-sm font-semibold shadow-md">
-                    Founder & Visionary
-                  </span>
-                </div>
-                <p className="mt-6 italic text-gray-700 text-lg text-center max-w-md">
-                  “Beauty is not just about appearance, it&apos;s about the confidence and
-                  elegance you carry every day.”
-                </p>
-                <p className="mt-4 font-signature text-pink-600 text-2xl">— Kerashine</p>
-              </motion.div>
-      
-              {/* Right Side – Story & Floating Video Edits */}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-xs tracking-[0.45em] uppercase text-pink-600">
+              Our Story
+            </p>
+
+            <h2 className="mt-6 text-4xl md:text-5xl font-extrabold text-gray-900 leading-snug">
+              The Story of <br />
+              <span className="text-pink-600">KERASHINE</span>
+            </h2>
+
+            <p className="mt-8 text-lg text-gray-700 leading-relaxed max-w-lg">
+              What started at{" "}
+              <span className="font-semibold text-pink-600">
+                Umani Beauty Salon
+              </span>{" "}
+              has now become a movement in haircare.
+              <br /><br />
+              With passion and expertise, our brand was created to empower individuals
+              to shine every day — with elegance, confidence, and grace.
+            </p>
+          </motion.div>
+
+          {/* RIGHT — VIDEOS */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="flex gap-6 flex-wrap justify-center lg:justify-end"
+          >
+            {videos.map((vid, i) => (
               <motion.div
-                initial={{ opacity: 0, x: 60 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                className="relative"
+                key={i}
+                whileHover={{ scale: 1.05 }}
+                className="relative bg-white rounded-2xl shadow-lg overflow-hidden w-40 h-52"
               >
-                <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-snug">
-                  The Story of <br />
-                  <span className="text-pink-600">KERASHINE</span>
-                </h2>
-                <p className="mt-6 text-lg text-gray-700 leading-relaxed max-w-lg">
-                  What started at{" "}
-                  <span className="font-semibold text-pink-600">Umani Beauty Salon </span> 
-                  has now become a movement in haircare. With passion and expertise,
-                  our founder created a brand that empowers individuals to shine
-                  everyday — with elegance, confidence, and grace.
-                </p>
-      
-                {/* Floating Video Edits */}
-                <div className="mt-12 flex gap-6 flex-wrap">
-                  {videos.map((vid, i) => (
-                    <motion.div
-                      key={i}
-                      whileHover={{ scale: 1.05, rotate: 1 }}
-                      className="relative bg-white rounded-2xl shadow-lg overflow-hidden w-40 h-52"
-                    >
-                      <video
-                        src={vid.src}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                  ))}
-                </div>
+                <video
+                  src={vid.src}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
               </motion.div>
-            </div>
+            ))}
+          </motion.div>
+
+        </div>
       </section>
 
       {/* ================= CONTACT ================= */}
