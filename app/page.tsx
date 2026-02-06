@@ -926,6 +926,7 @@ export default function Home() {
 
         <div className="relative max-w-7xl mx-auto px-6 text-center">
 
+
           {/* Heading */}
           <p className="text-xs tracking-[0.45em] uppercase text-pink-600">
             Contact
