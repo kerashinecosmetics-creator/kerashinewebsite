@@ -1,5 +1,13 @@
 "use client";
 
+type Shipping = {
+  name: string
+  phone: string
+  city: string
+  postal: string
+  address: string
+}
+
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +17,7 @@ import { useCart } from "@/app/context/CartContext";
 export default function CartPage() {
   const { items, addToCart, removeFromCart, decreaseQty } = useCart();
 
-  const [shipping, setShipping] = useState({
+  const [shipping, setShipping] = useState<Shipping>({
     name: "",
     phone: "",
     city: "",
@@ -164,18 +172,20 @@ Payment Method: Cash on Delivery
               </h2>
 
               <div className="grid sm:grid-cols-2 gap-6">
-                {[
-                  ["Full Name", "name"],
-                  ["Phone Number", "phone"],
-                  ["City", "city"],
-                  ["Postal Code", "postal"],
-                ].map(([label, key]) => (
+                {(
+                  [
+                    ["Full Name", "name"],
+                    ["Phone Number", "phone"],
+                    ["City", "city"],
+                    ["Postal Code", "postal"],
+                  ] as [string, keyof Shipping][]
+                ).map(([label, key]) => (
                   <input
                     key={key}
                     placeholder={label}
                     className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm
-                               focus:outline-none focus:ring-1 focus:ring-black"
-                    value={(shipping as any)[key]}
+                              focus:outline-none focus:ring-1 focus:ring-black"
+                    value={shipping[key]}
                     onChange={(e) =>
                       setShipping({ ...shipping, [key]: e.target.value })
                     }

@@ -926,7 +926,6 @@ export default function Home() {
 
         <div className="relative max-w-7xl mx-auto px-6 text-center">
 
-
           {/* Heading */}
           <p className="text-xs tracking-[0.45em] uppercase text-pink-600">
             Contact
@@ -1029,31 +1028,5 @@ export default function Home() {
         </p>
       </footer>
     </main>
-  );
-}
-
-/* ===== Helper Components ===== */
-
-function ContactCard({ title, value }: { title: string; value: string }) {
-  return (
-    <div className="bg-white p-10 rounded-3xl shadow-lg hover:shadow-xl transition">
-      <h3 className="text-xl font-semibold">{title}</h3>
-      <p className="mt-4 text-gray-600">{value}</p>
-    </div>
-  );
-}
-
-function ActionBtn({ text, solid }: { text: string; solid?: boolean }) {
-  return (
-    <a
-      href="#"
-      className={`px-8 py-3 rounded-full font-semibold transition ${
-        solid
-          ? "bg-pink-600 text-white hover:bg-pink-700"
-          : "border-2 border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white"
-      }`}
-    >
-      {text}
-    </a>
   );
 }
