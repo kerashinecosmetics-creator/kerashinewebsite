@@ -30,18 +30,10 @@ export default function CartPage() {
 
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
-  const isShippingValid =
-    shipping.name.trim() &&
-    shipping.phone.trim() &&
-    shipping.city.trim() &&
-    shipping.postal.trim() &&
-    shipping.address.trim();
-
   const subtotal = items.reduce(
     (total, item) => total + item.price * item.qty,
     0
   );
-
 
   const handlePlaceOrder = () => {
     if (!captchaVerified) {
@@ -70,28 +62,39 @@ export default function CartPage() {
       return;
     }
 
+    const orderId = Math.floor(100000 + Math.random() * 900000);
+
     const orderItems = items
       .map(
         (item) =>
-          `${item.name} x ${item.qty} = Rs. ${item.price * item.qty}`
+          `• ${item.name} × ${item.qty} — Rs. ${item.price * item.qty}`
       )
       .join("\n");
 
     const message = `
-NEW ORDER - KERASHINE
+🖤 *NEW ORDER – KERASHINE HAIR CARE*
+━━━━━━━━━━━━━━━━━━
 
-Customer Details:
-Name: ${shipping.name}
+🆔 Order ID: ${orderId}
+
+👤 *Customer Details*
+━━━━━━━━━━━━━━━━━━
+Full Name: ${shipping.name}
 Phone: ${shipping.phone}
 City: ${shipping.city}
 Postal Code: ${shipping.postal}
 Address: ${shipping.address}
 
-Order:
+🛍 *Order Summary*
+━━━━━━━━━━━━━━━━━━
 ${orderItems}
 
-Total: Rs. ${subtotal}
-Payment Method: Cash on Delivery
+━━━━━━━━━━━━━━━━━━
+💰 *Total Amount:* Rs. ${subtotal.toLocaleString()}
+🚚 Payment Method: Cash on Delivery
+
+Thank you for choosing Kerashine ✨
+Please confirm this order.
 `;
 
     window.open(
@@ -126,7 +129,6 @@ Payment Method: Cash on Delivery
           {/* LEFT */}
           <div className="lg:col-span-2 space-y-10">
 
-            {/* CART ITEMS */}
             {items.map((item) => (
               <div
                 key={item.id}
@@ -218,7 +220,7 @@ Payment Method: Cash on Delivery
                 />
               </div>
 
-              {/* Google reCAPTCHA */}
+              {/* Google reCAPTCHA (UNCHANGED) */}
               <div className="mt-6">
                 <ReCAPTCHA
                   ref={recaptchaRef}
@@ -227,17 +229,9 @@ Payment Method: Cash on Delivery
                 />
               </div>
 
-              <div className="mt-6 space-y-4">
-                <button
-                  onClick={handlePlaceOrder}
-                  className="mt-8 w-full rounded-full py-4 text-sm tracking-widest uppercase transition bg-black text-white hover:bg-gray-900"
-                >
-                  Place Order
-                </button>
-              </div>
             </div>
 
-            {/* PAYMENT SECTION SAME AS BEFORE */}
+            {/* PAYMENT */}
             <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
               <h2 className="text-2xl font-serif text-gray-900 mb-6">
                 Payment Method
@@ -252,7 +246,7 @@ Payment Method: Cash on Delivery
             </div>
           </div>
 
-          {/* SUMMARY EXACT SAME */}
+          {/* SUMMARY */}
           <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-md h-fit sticky top-32">
             <h2 className="text-2xl font-serif mb-6 text-gray-900">
               Order Summary
@@ -278,7 +272,7 @@ Payment Method: Cash on Delivery
               onClick={handlePlaceOrder}
               className="mt-8 w-full rounded-full py-4 text-sm tracking-widest uppercase transition bg-black text-white hover:bg-gray-900"
             >
-              Place Order
+              Confirm & Place Order
             </button>
 
             <p className="text-xs text-gray-500 text-center mt-3">
