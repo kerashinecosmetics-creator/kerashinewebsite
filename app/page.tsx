@@ -375,7 +375,7 @@ export default function Home() {
       </section>
 
       {/* ================= WHY SECTION ================= */}
-      <section id="products"
+      <section id="askingdiv"
         className="relative py-28 md:py-40 overflow-hidden
                   bg-gradient-to-br from-pink-100 via-rose-100 to-orange-100"
       >
@@ -538,7 +538,7 @@ export default function Home() {
       </section>
       
       {/* ================= SIGNATURE SETS (VIP EDITION) ================= */}
-      <section
+      <section id="products"
         className="relative py-28 sm:py-28 md:py-40 lg:py-48 overflow-hidden
                   bg-gradient-to-br from-[#fff1f4] via-[#ffe8ef] to-[#fff6ec]"
       >
@@ -700,7 +700,7 @@ export default function Home() {
 
       {/* ================= PRODUCTS — VIP CAROUSEL ================= */}
       <section
-        id="products"
+        id="shop"
         className="relative py-48 overflow-hidden
                   bg-gradient-to-br from-[#fff3f6] via-[#fff7fb] to-[#fff1ea]"
       >
