@@ -131,7 +131,7 @@ export default function Home() {
 
             {/* Nav */}
             <nav className="flex-1 flex flex-col items-center justify-center gap-12 text-3xl tracking-widest uppercase">
-              {["Home", "Collection", "Story", "Contact"].map((item) => (
+              {["Home", "Products", "Story", "Contact"].map((item) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
@@ -945,77 +945,53 @@ export default function Home() {
 
           {/* Contact Cards */}
           <div className="mt-24 grid gap-12 md:grid-cols-3">
-
-            <div className="group rounded-[36px] bg-white/80 backdrop-blur-xl
-                            border border-white/60 shadow-xl
-                            hover:shadow-2xl hover:-translate-y-2
-                            transition-all duration-300 p-12">
+            {/* Email */}
+            <a
+              href="mailto:kerashinecosmetics@gmail.com"
+              className="group rounded-[36px] bg-white/80 backdrop-blur-xl
+                        border border-white/60 shadow-xl
+                        hover:shadow-2xl hover:-translate-y-2
+                        transition-all duration-300 p-12 block"
+            >
               <h3 className="text-xl font-serif text-gray-900">
                 Email
               </h3>
               <p className="mt-4 text-gray-600">
                 kerashinecosmetics@gmail.com
               </p>
-            </div>
+            </a>
 
-            <div className="group rounded-[36px] bg-white/80 backdrop-blur-xl
-                            border border-white/60 shadow-xl
-                            hover:shadow-2xl hover:-translate-y-2
-                            transition-all duration-300 p-12">
+            {/* Phone */}
+            <a
+              href="tel:+923268681026"
+              className="group rounded-[36px] bg-white/80 backdrop-blur-xl
+                        border border-white/60 shadow-xl
+                        hover:shadow-2xl hover:-translate-y-2
+                        transition-all duration-300 p-12 block"
+            >
               <h3 className="text-xl font-serif text-gray-900">
                 Phone
               </h3>
               <p className="mt-4 text-gray-600">
                 +92 326 8681026
               </p>
-            </div>
+            </a>
 
-            <div className="group rounded-[36px] bg-white/80 backdrop-blur-xl
-                            border border-white/60 shadow-xl
-                            hover:shadow-2xl hover:-translate-y-2
-                            transition-all duration-300 p-12">
+            {/* Location */}
+            <a
+              href="https://maps.google.com/?q=North+Nazimabad+Town+Karachi"
+              target="_blank"
+              className="group rounded-[36px] bg-white/80 backdrop-blur-xl
+                        border border-white/60 shadow-xl
+                        hover:shadow-2xl hover:-translate-y-2
+                        transition-all duration-300 p-12 block"
+            >
               <h3 className="text-xl font-serif text-gray-900">
                 Location
               </h3>
               <p className="mt-4 text-gray-600">
                 North Nazimabad Town, Karachi
               </p>
-            </div>
-
-          </div>
-
-          {/* Action Buttons */}
-          <div className="mt-20 flex flex-wrap justify-center gap-6">
-
-            <a
-              href="mailto:kerashinecosmetics@gmail.com"
-              className="px-10 py-4 rounded-full bg-pink-600 text-white
-                        text-sm tracking-widest uppercase font-semibold
-                        shadow-lg hover:bg-pink-700 hover:scale-[1.04]
-                        transition"
-            >
-              Send Email
-            </a>
-
-            <a
-              href="tel:+923101425352"
-              className="px-10 py-4 rounded-full bg-pink-600 text-white
-                        text-sm tracking-widest uppercase font-semibold
-                        shadow-lg hover:bg-pink-700 hover:scale-[1.04]
-                        transition"
-            >
-              Call Now
-            </a>
-
-            <a
-              href="https://maps.google.com/?q=North+Nazimabad+Town+Karachi"
-              target="_blank"
-              className="px-10 py-4 rounded-full bg-pink-600 text-white
-                        text-sm tracking-widest uppercase font-semibold
-                        shadow-lg hover:bg-pink-700 hover:scale-[1.04]
-                        transition"
-            >
-              Get Directions
             </a>
 
           </div>
