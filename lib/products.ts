@@ -21,6 +21,7 @@ export type SignatureSet = {
   qty: number;
   type: "set";
   items: string[];
+  sizes : string[];
 };
 
 export const products: Product[] = [
@@ -112,7 +113,7 @@ export const products: Product[] = [
 export const signatureSets: SignatureSet[] = [
   {
     id: "set-small",
-    name: "Signature Care Set — Small",
+    name: "Signature Care Set",
     price: 4700,
     image: "/sets/250mlFullSet.png",
     qty: 1,
@@ -123,10 +124,11 @@ export const signatureSets: SignatureSet[] = [
       "Hair Mask 300ml",
       "Serum 60ml",
     ],
+    sizes : ["250ml"],
   },
   {
     id: "set-large",
-    name: "Signature Care Set — Large",
+    name: "Signature Care Set",
     price: 6500,
     image: "/sets/500mlFullSet.png",
     qty: 1,
@@ -137,6 +139,7 @@ export const signatureSets: SignatureSet[] = [
       "Hair Mask 500ml",
       "Serum 60ml",
     ],
+    sizes : ["500ml"],
   },
 ];
 

@@ -67,7 +67,7 @@ export default function CartPage() {
     const orderItems = items
       .map(
         (item) =>
-          `• ${item.name} × ${item.qty} — Rs. ${item.price * item.qty}`
+          `• ${item.name} (${item.sizes}) × ${item.qty} — Rs. ${item.price * item.qty}`
       )
       .join("\n");
 
@@ -98,7 +98,7 @@ Please confirm this order.
 `;
 
     window.open(
-      `https://wa.me/923101425352?text=${encodeURIComponent(message)}`,
+      `https://wa.me/923268681026?text=${encodeURIComponent(message)}`,
       "_blank"
     );
   };

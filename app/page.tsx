@@ -672,6 +672,7 @@ export default function Home() {
                           image: set.image,
                           qty: 1,
                           type: "set",
+                          sizes : set.sizes,
                         })
                       }
                       className="
@@ -829,6 +830,7 @@ export default function Home() {
                           image: product.image,
                           qty: 1,
                           type: "product",
+                          sizes : product.sizes,
                         })
                       }
                       className="mt-6 w-full rounded-full bg-black text-white
@@ -964,7 +966,7 @@ export default function Home() {
                 Phone
               </h3>
               <p className="mt-4 text-gray-600">
-                +92 335 2545444
+                +92 326 8681026
               </p>
             </div>
 
