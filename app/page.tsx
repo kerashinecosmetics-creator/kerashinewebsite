@@ -15,6 +15,12 @@ export default function Home() {
   const [cartOpen, setCartOpen] = useState(false); // cart flyout
   const { items, addToCart, removeFromCart, decreaseQty } = useCart();
   const subtotal = items.reduce((total, item) => total + item.price * item.qty, 0);
+  const originalTotal = items.reduce(
+  (total, item) => total + (item.price / 0.75) * item.qty,
+  0
+);
+
+const savings = originalTotal - subtotal;
   const [scrolled, setScrolled] = useState(false);
 
   const videos: { src: string }[] = [
@@ -42,7 +48,7 @@ export default function Home() {
           : "bg-transparent text-white"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
           
           {/* Logo */}
           <Link href="/" className="group text-lg tracking-[0.25em] font-light">
@@ -263,20 +269,47 @@ export default function Home() {
               {/* Footer */}
               {items.length > 0 && (
                 <div className="border-t px-6 py-6">
-                  <div className="flex justify-between text-sm text-black mb-4">
-                    <span>Subtotal</span>
-                    <span>Rs {subtotal.toLocaleString()}</span>
+
+                  {/* PRICE BREAKDOWN */}
+                  <div className="flex flex-col gap-2 text-sm text-black mb-6">
+
+                    {/* Original */}
+                    <div className="flex justify-between text-gray-400 line-through">
+                      <span>Original</span>
+                      <span>Rs {Math.round(originalTotal).toLocaleString()}</span>
+                    </div>
+
+                    {/* Subtotal */}
+                    <div className="flex justify-between font-semibold text-base">
+                      <span>Subtotal</span>
+                      <span>Rs {subtotal.toLocaleString()}</span>
+                    </div>
+
+                    {/* Savings */}
+                    <div className="flex justify-between text-pink-600 text-xs font-medium">
+                      <span>You Saved</span>
+                      <span>Rs {Math.round(savings).toLocaleString()}</span>
+                    </div>
+
                   </div>
 
+                  {/* CTA */}
                   <Link href="/cart">
-                    <button className="w-full bg-black text-white py-4 text-xs tracking-widest uppercase hover:bg-pink-600 transition">
+                    <button className="w-full bg-black text-white py-4 text-xs tracking-widest uppercase font-semibold rounded-full hover:bg-pink-600 transition">
                       Proceed to Checkout
                     </button>
                   </Link>
 
-                  <p className="text-[10px] text-center text-gray-400 mt-4">
+                  {/* Urgency */}
+                  <p className="text-[10px] text-center text-pink-600 mt-3 font-medium">
+                    🎉 Anniversary Offer Applied — Limited Time Only
+                  </p>
+
+                  {/* Note */}
+                  <p className="text-[10px] text-center text-gray-400 mt-2">
                     Shipping & taxes calculated at checkout
                   </p>
+
                 </div>
               )}
             </motion.aside>
@@ -315,44 +348,54 @@ export default function Home() {
             </div>
 
             {/* ================= LEFT CONTENT ================= */}
-            <div>
-              <p className="text-xs tracking-[0.45em] uppercase text-pink-400">
-                Professional Haircare
+            <div className="max-w-xl">
+              {/* Label */}
+              <p className="text-[10px] tracking-[0.5em] uppercase text-gray-500">
+                Kera Shine • Anniversary Edition
               </p>
 
-              <h1 className="mt-8 text-[clamp(2.4rem,8vw,5.5rem)] font-extrabold leading-[1.05]">
-                Salon-Grade Care
+              {/* Heading */}
+              <h1 className="mt-6 text-[clamp(2.8rem,7vw,5.5rem)] font-semibold leading-[1.05] tracking-tight">
+                Stronger,
                 <br />
-                <span className="bg-gradient-to-r from-pink-400 to-rose-500 bg-clip-text text-transparent">
-                  For Stronger, Shinier Hair
-                </span>
+                Shinier Hair
               </h1>
 
-              <p className="mt-8 max-w-xl text-lg text-gray-300 leading-relaxed">
-                Crafted for salons and perfected for everyday use.
-                Premium formulas designed to restore, protect, and elevate every hair type.
+              {/* Description */}
+              <p className="mt-6 text-gray-400 text-lg leading-relaxed">
+                5 years of salon-grade formulas trusted by professionals.
+              </p>
+
+              {/* Offer */}
+              <p className="mt-3 text-pink-500 font-medium text-sm tracking-wide">
+                Anniversary Offer — Flat 25% OFF
               </p>
 
               {/* CTA */}
-              <div className="mt-12">
+              <div className="mt-10">
                 <a
                   href="#products"
-                  className="relative inline-flex w-full md:w-auto items-center justify-center
-                  px-12 py-4 rounded-full bg-white text-black
-                  shadow-[0_0_40px_rgba(236,72,153,0.35)]
-                  hover:bg-pink-600 hover:text-white
-                  transition"
+                  className="
+                    inline-flex items-center justify-center
+                    px-12 py-4 rounded-full
+                    bg-pink-600 text-white
+                    text-sm tracking-wide font-medium
+                    shadow-lg shadow-pink-600/20
+                    hover:bg-pink-700 hover:scale-[1.02]
+                    transition duration-300
+                  "
                 >
-                  Shop Hair Solutions
+                  Shop Now
                 </a>
               </div>
 
-              {/* Trust points */}
-              <div className="mt-10 flex gap-6 md:gap-8 text-xs tracking-widest uppercase text-gray-400 flex-wrap">
+              {/* Trust */}
+              <div className="mt-10 flex gap-8 text-[10px] tracking-[0.3em] uppercase text-gray-500">
                 <span>Salon Approved</span>
-                <span>Unisex</span>
                 <span>All Hair Types</span>
+                <span>Since 2021</span>
               </div>
+
             </div>
 
             {/* ================= DESKTOP VIDEO ================= */}
@@ -580,120 +623,148 @@ export default function Home() {
           {/* SETS */}
           <div className="space-y-24 sm:space-y-32 lg:space-y-40">
 
-            {signatureSets.map((set: SignatureSet, index: number) => (
-              <div
-                key={set.id}
-                className="relative grid grid-cols-1 lg:grid-cols-2
-                          items-center gap-14 sm:gap-20 lg:gap-24
-                          rounded-[36px] sm:rounded-[44px] lg:rounded-[56px]
-                          bg-white/80 backdrop-blur-2xl
-                          shadow-[0_30px_90px_rgba(0,0,0,0.12)]
-                          p-6 sm:p-10 lg:p-24"
-              >
-                {/* Floating index */}
-                <span className="absolute -top-6 -left-4 sm:-top-8 sm:-left-8
-                                text-[72px] sm:text-[96px] lg:text-[120px]
-                                font-serif text-pink-200/40 select-none">
-                  {index + 1}
-                </span>
+            {signatureSets.map((set: SignatureSet, index: number) => {
+              const discountedPrice = Math.round(set.price * 0.75);
+              const savings = set.price - discountedPrice;
 
-                {/* IMAGE */}
-                <div className="relative flex flex-col items-center gap-4">
+              return (
+                <div
+                  key={set.id}
+                  className="relative grid grid-cols-1 lg:grid-cols-2
+                  items-center gap-14 sm:gap-20 lg:gap-24
+                  rounded-[36px] sm:rounded-[44px] lg:rounded-[56px]
+                  bg-white/80 backdrop-blur-2xl
+                  shadow-[0_30px_90px_rgba(0,0,0,0.12)]
+                  p-6 sm:p-10 lg:p-24"
+                >
 
-                  {/* Badge — image se upar */}
-                  <span className="inline-block bg-black/80 text-white
-                                  text-[10px] tracking-widest px-3 py-1 rounded-full">
-                    SIGNATURE SET
+                  {/* Floating index */}
+                  <span className="absolute -top-6 -left-4 sm:-top-8 sm:-left-8
+                  text-[72px] sm:text-[96px] lg:text-[120px]
+                  font-serif text-pink-200/40 select-none">
+                    {index + 1}
                   </span>
 
-                  {/* Image */}
-                  <div className="relative flex justify-center">
-                    <Image
-                      src={set.image}
-                      alt={set.name}
-                      width={520}
-                      height={520}
-                      className="object-contain
-                                max-w-[220px] sm:max-w-[320px] lg:max-w-none
-                                drop-shadow-[0_40px_70px_rgba(0,0,0,0.25)]
-                                transition duration-700"
-                    />
-                  </div>
-                </div>
+                  {/* IMAGE */}
+                  <div className="relative flex flex-col items-center gap-4">
 
-                {/* CONTENT */}
-                <div>
-                  {set.id === "set-small" && (
-                    <span className="inline-block mb-6
-                                    text-[10px] sm:text-xs
-                                    tracking-[0.35em] sm:tracking-[0.45em]
-                                    uppercase text-pink-600">
-                      Most Loved
-                    </span>
-                  )}
-
-                  <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl
-                                font-serif text-gray-900">
-                    {set.name}
-                  </h3>
-
-                  <p className="mt-6 sm:mt-8 lg:mt-10
-                                text-base sm:text-lg lg:text-xl
-                                text-gray-600 leading-relaxed max-w-xl">
-                    {set.id === "set-small"
-                      ? "A refined introduction to Kera Shine — effortless daily luxury."
-                      : "A complete professional-grade ritual for long-term transformation."}
-                  </p>
-
-                  <ul className="mt-8 sm:mt-10 lg:mt-12
-                                space-y-2 sm:space-y-3
-                                text-sm sm:text-base lg:text-lg
-                                text-gray-700">
-                    {set.items.map((item: string) => (
-                      <li key={item}>— {item}</li>
-                    ))}
-                  </ul>
-
-                  {/* PRICE + BUTTON */}
-                  <div className="mt-10 sm:mt-12 lg:mt-16
-                                  flex flex-col sm:flex-row
-                                  sm:items-center gap-6 sm:gap-10">
-                    <span className="text-2xl sm:text-3xl
-                                    font-semibold text-gray-900">
-                      PKR {set.price}
+                    {/* Discount Badge */}
+                    <span className="absolute top-4 right-4 bg-pink-600 text-white text-[10px] px-3 py-1 rounded-full tracking-widest">
+                      -25% OFF
                     </span>
 
-                    <button
-                      onClick={() =>
-                        addToCart({
-                          id: set.id,
-                          name: set.name,
-                          price: set.price,
-                          image: set.image,
-                          qty: 1,
-                          type: "set",
-                          sizes : set.sizes,
-                        })
-                      }
-                      className="
-                        w-full sm:w-auto
-                        rounded-full bg-black
-                        px-8 sm:px-12 lg:px-16
-                        py-3 sm:py-4 lg:py-5
-                        text-[11px] sm:text-xs text-white
-                        tracking-wider sm:tracking-widest
-                        uppercase font-semibold
-                        shadow-xl
-                        hover:bg-pink-600 hover:scale-[1.05]
-                        transition duration-300
-                      "
-                    >
-                      Add Ritual
-                    </button>
+                    {/* Badge */}
+                    <span className="inline-block bg-black/80 text-white
+                    text-[10px] tracking-widest px-3 py-1 rounded-full">
+                      SIGNATURE SET
+                    </span>
+
+                    {/* Image */}
+                    <div className="relative flex justify-center">
+                      <Image
+                        src={set.image}
+                        alt={set.name}
+                        width={520}
+                        height={520}
+                        className="object-contain
+                        max-w-[220px] sm:max-w-[320px] lg:max-w-none
+                        drop-shadow-[0_40px_70px_rgba(0,0,0,0.25)]
+                        transition duration-700"
+                      />
+                    </div>
+                  </div>
+
+                  {/* CONTENT */}
+                  <div>
+
+                    {set.id === "set-small" && (
+                      <span className="inline-block mb-6 text-[10px] sm:text-xs
+                      tracking-[0.35em] uppercase text-pink-600">
+                        Most Loved
+                      </span>
+                    )}
+
+                    {set.id === "set-large" && (<>
+                        <span className="inline-block mb-6 text-[10px] sm:text-xs
+                        tracking-[0.35em] uppercase text-green-600">
+                          Best Value
+                        </span>
+
+                        <span className="block text-[11px] text-green-600 font-medium mt-2">
+                          Best Deal – Maximum Savings
+                        </span>
+                      </>
+                    )}
+
+                    <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+                    font-serif text-gray-900">
+                      {set.name} ({set.sizes[0]})
+                    </h3>
+
+                    <p className="mt-6 text-base sm:text-lg lg:text-xl
+                    text-gray-600 leading-relaxed max-w-xl">
+                      {set.id === "set-small"
+                        ? "A refined introduction to Kera Shine — effortless daily luxury."
+                        : "A complete professional-grade ritual for long-term transformation."}
+                    </p>
+
+                    <ul className="mt-8 space-y-2 text-sm sm:text-base text-gray-700">
+                      {set.items.map((item: string) => (
+                        <li key={item}>— {item}</li>
+                      ))}
+                    </ul>
+
+                    {/* PRICE */}
+                    <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-6">
+
+                      <div>
+                        {/* Old */}
+                        <span className="text-sm text-gray-400 line-through block">
+                          PKR {set.price}
+                        </span>
+
+                        {/* New */}
+                        <span className="text-2xl sm:text-3xl font-semibold text-gray-900">
+                          PKR {discountedPrice}
+                        </span>
+
+                        {/* Savings */}
+                        <span className="text-xs text-pink-600 font-medium block mt-1">
+                          You Save PKR {savings}
+                        </span>
+                      </div>
+
+                      {/* CTA */}
+                      <button
+                        onClick={() =>
+                          addToCart({
+                            id: set.id,
+                            name: set.name,
+                            price: discountedPrice, // 🔥 FIXED
+                            image: set.image,
+                            qty: 1,
+                            type: "set",
+                            sizes: set.sizes,
+                          })
+                        }
+                        className="
+                          w-full sm:w-auto
+                          rounded-full bg-black
+                          px-10 py-4
+                          text-xs text-white tracking-widest uppercase font-semibold
+                          shadow-xl
+                          hover:bg-pink-600 hover:scale-[1.05]
+                          transition duration-300
+                        "
+                      >
+                        Get This Set – 25% OFF
+                      </button>
+
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
 
           </div>
         </div>
@@ -777,71 +848,91 @@ export default function Home() {
               className="flex gap-20 overflow-x-auto scroll-smooth
                         no-scrollbar px-20"
             >
-              {products.map((product) => (
-                <div
-                  key={product.id}
-                  className="min-w-[340px] max-w-[340px]
-                            group relative rounded-[44px] overflow-hidden
-                            bg-white/85 backdrop-blur-2xl
-                            shadow-[0_30px_80px_rgba(0,0,0,0.12)]
-                            transition-all duration-500
-                            hover:-translate-y-4"
-                >
-                  {/* Gradient glow */}
+              {products.map((product) => {
+                const discountedPrice = Math.round(product.price * 0.75);
+
+                return (
                   <div
-                    className={`absolute inset-0 bg-gradient-to-br ${product.bg}
-                                opacity-50 group-hover:opacity-80 transition`}
-                  />
+                    key={product.id}
+                    className="min-w-[340px] max-w-[340px]
+                    group relative rounded-[44px] overflow-hidden
+                    bg-white/85 backdrop-blur-2xl
+                    shadow-[0_30px_80px_rgba(0,0,0,0.12)]
+                    transition-all duration-500
+                    hover:-translate-y-4"
+                  >
 
-                  {/* Image */}
-                  <div className="relative h-[320px] flex items-center justify-center">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      width={220}
-                      height={220}
-                      className="object-contain
-                                drop-shadow-[0_40px_70px_rgba(0,0,0,0.25)]
-                                group-hover:scale-[1.12]
-                                transition duration-700"
+                    {/* Discount Badge */}
+                    <div className="absolute top-4 right-4 bg-pink-600 text-white text-[10px] px-3 py-1 rounded-full tracking-widest">
+                      -25%
+                    </div>
+
+                    {/* Gradient */}
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${product.bg}
+                      opacity-50 group-hover:opacity-80 transition`}
                     />
+
+                    {/* Image */}
+                    <div className="relative h-[320px] flex items-center justify-center">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        width={220}
+                        height={220}
+                        className="object-contain drop-shadow-[0_40px_70px_rgba(0,0,0,0.25)]
+                        group-hover:scale-[1.12] transition duration-700"
+                      />
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative px-8 pb-12 text-center">
+                      <h3 className="text-2xl font-serif text-gray-900">
+                        {product.name} ({product.sizes[0]})
+                      </h3>
+
+                      <p className="mt-3 text-sm text-gray-600 leading-relaxed">
+                        {product.description}
+                      </p>
+
+                      {/* Price */}
+                      <div className="mt-5 flex flex-col items-center gap-1">
+                        <span className="text-sm text-gray-400 line-through">
+                          PKR {product.price}
+                        </span>
+
+                        <span className="text-xl font-semibold text-gray-900">
+                          PKR {discountedPrice}
+                        </span>
+
+                        <span className="text-[10px] text-pink-600 font-medium">
+                          You Save PKR {product.price - discountedPrice}
+                        </span>
+                      </div>
+
+                      {/* CTA */}
+                      <button
+                        onClick={() =>
+                          addToCart({
+                            id: product.id,
+                            name: product.name,
+                            price: discountedPrice, // 🔥 IMPORTANT FIX
+                            image: product.image,
+                            qty: 1,
+                            type: "product",
+                            sizes: product.sizes,
+                          })
+                        }
+                        className="mt-6 w-full rounded-full bg-black text-white
+                        py-4 text-xs tracking-widest uppercase font-semibold
+                        shadow-lg hover:bg-pink-600 transition"
+                      >
+                        Add to Cart – 25% OFF
+                      </button>
+                    </div>
                   </div>
-
-                  {/* Content */}
-                  <div className="relative px-8 pb-12 text-center">
-                    <h3 className="text-2xl font-serif text-gray-900">
-                      {product.name}
-                    </h3>
-
-                    <p className="mt-3 text-sm text-gray-600 leading-relaxed">
-                      {product.description}
-                    </p>
-
-                    <span className="block mt-5 text-lg font-semibold text-gray-900">
-                      PKR {product.price}
-                    </span>
-
-                    <button
-                      onClick={() =>
-                        addToCart({
-                          id: product.id,
-                          name: product.name,
-                          price: product.price,
-                          image: product.image,
-                          qty: 1,
-                          type: "product",
-                          sizes : product.sizes,
-                        })
-                      }
-                      className="mt-6 w-full rounded-full bg-black text-white
-                                py-4 text-xs tracking-widest uppercase font-semibold
-                                shadow-lg hover:bg-pink-600 transition"
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
           </div>

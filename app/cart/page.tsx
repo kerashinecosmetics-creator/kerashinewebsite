@@ -34,6 +34,15 @@ export default function CartPage() {
     (total, item) => total + item.price * item.qty,
     0
   );
+  
+  const originalTotal = items.reduce(
+  (total, item) => total + (item.price / 0.75) * item.qty,
+  0
+);
+
+const savings = originalTotal - subtotal;
+
+const finalTotal = subtotal + 200;
 
   const handlePlaceOrder = () => {
     if (!captchaVerified) {
@@ -90,7 +99,11 @@ Address: ${shipping.address}
 ${orderItems}
 
 ━━━━━━━━━━━━━━━━━━
-💰 *Total Amount:* Rs. ${subtotal.toLocaleString()}
+💰 *Subtotal:* Rs. ${subtotal.toLocaleString()}
+🚚 Delivery: Rs. 200
+━━━━━━━━━━━━━━━━━━
+💰 *Total Amount:* Rs. ${finalTotal.toLocaleString()}
+
 🚚 Payment Method: Cash on Delivery
 
 Thank you for choosing Kerashine ✨
@@ -263,9 +276,36 @@ Please confirm this order.
 
             <div className="h-px bg-gray-200 my-6" />
 
+            {/* Original */}
+            <div className="flex justify-between text-sm text-gray-400 line-through">
+              <span>Original</span>
+              <span>Rs. {Math.round(originalTotal).toLocaleString()}</span>
+            </div>
+
+            {/* Discounted */}
             <div className="flex justify-between text-lg font-semibold text-gray-900">
-              <span>Total</span>
+              <span>Subtotal</span>
               <span>Rs. {subtotal.toLocaleString()}</span>
+            </div>
+
+            {/* Savings */}
+            <div className="flex justify-between text-pink-600 text-xs font-medium">
+              <span>You Saved</span>
+              <span>Rs. {Math.round(savings).toLocaleString()}</span>
+            </div>
+            
+            {/* Delivery */}
+            <div className="flex justify-between text-sm text-gray-700">
+              <span>Delivery</span>
+              <span>
+                200
+              </span>
+            </div>
+
+            {/* Final Total */}
+            <div className="flex justify-between text-lg font-semibold text-black">
+              <span>Total</span>
+              <span>Rs. {finalTotal.toLocaleString()}</span>
             </div>
 
             <button
