@@ -34,7 +34,7 @@ export const products: Product[] = [
     usage: ["Apply to wet hair.", "Massage gently.", "Rinse thoroughly."],
     ingredients: ["Aqua", "Argan Oil", "Aloe Vera", "Vitamin E"],
     sizes: ["250ml"],
-    price: 1200,
+    price: 1500,
     bg: "from-pink-50 to-white",
   },
   {
@@ -46,7 +46,7 @@ export const products: Product[] = [
     usage: ["Apply to wet hair.", "Massage gently.", "Rinse thoroughly."],
     ingredients: ["Aqua", "Argan Oil", "Aloe Vera", "Vitamin E"],
     sizes: ["500ml"],
-    price: 1800,
+    price: 2000,
     bg: "from-pink-50 to-white",
   },
   {
@@ -58,7 +58,7 @@ export const products: Product[] = [
     usage: ["Apply after shampooing.", "Leave 2–3 mins.", "Rinse well."],
     ingredients: ["Shea Butter", "Coconut Oil", "Keratin", "Panthenol"],
     sizes: ["250ml"],
-    price: 1200,
+    price: 1500,
     bg: "from-rose-50 to-white",
   },
   {
@@ -70,7 +70,7 @@ export const products: Product[] = [
     usage: ["Apply after shampooing.", "Leave 2–3 mins.", "Rinse well."],
     ingredients: ["Shea Butter", "Coconut Oil", "Keratin", "Panthenol"],
     sizes: ["500ml"],
-    price: 1800,
+    price: 2000,
     bg: "from-rose-50 to-white",
   },
   {
@@ -82,7 +82,7 @@ export const products: Product[] = [
     usage: ["Apply generously.", "Leave 10–15 mins.", "Rinse well."],
     ingredients: ["Macadamia Oil", "Avocado Oil", "Shea Butter"],
     sizes: ["300ml"],
-    price: 1200,
+    price: 1500,
     bg: "from-gray-50 to-white",
   },
   {
@@ -94,7 +94,7 @@ export const products: Product[] = [
     usage: ["Apply generously.", "Leave 10–15 mins.", "Rinse well."],
     ingredients: ["Macadamia Oil", "Avocado Oil", "Shea Butter"],
     sizes: ["500ml"],
-    price: 1800,
+    price: 2000,
     bg: "from-gray-50 to-white",
   },
   {
@@ -106,7 +106,7 @@ export const products: Product[] = [
     usage: ["Take 2–3 drops.", "Apply mid-lengths to ends.", "Style."],
     ingredients: ["Argan Oil", "Jojoba Oil", "Vitamin E"],
     sizes: ["60ml"],
-    price: 1100,
+    price: 1200,
     bg: "from-yellow-50 to-white",
   },
 ];
@@ -114,7 +114,7 @@ export const signatureSets: SignatureSet[] = [
   {
     id: "set-small",
     name: "Signature Care Set",
-    price: 4700,
+    price: 5700,
     image: "/sets/250mlFullSet.png",
     qty: 1,
     type: "set",
@@ -129,7 +129,7 @@ export const signatureSets: SignatureSet[] = [
   {
     id: "set-large",
     name: "Signature Care Set",
-    price: 6500,
+    price: 7200,
     image: "/sets/500mlFullSet.png",
     qty: 1,
     type: "set",

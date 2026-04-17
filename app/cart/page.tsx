@@ -269,12 +269,6 @@ Please confirm this order.
 
             <div className="h-px bg-gray-200 my-6" />
 
-            {/* Original */}
-            <div className="flex justify-between text-sm text-gray-400 line-through">
-              <span>Original</span>
-              <span>Rs. {Math.round(subtotal).toLocaleString()}</span>
-            </div>
-
             {/* Discounted */}
             <div className="flex justify-between text-lg font-semibold text-gray-900">
               <span>Subtotal</span>
