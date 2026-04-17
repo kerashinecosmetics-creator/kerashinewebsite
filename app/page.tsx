@@ -15,12 +15,6 @@ export default function Home() {
   const [cartOpen, setCartOpen] = useState(false); // cart flyout
   const { items, addToCart, removeFromCart, decreaseQty } = useCart();
   const subtotal = items.reduce((total, item) => total + item.price * item.qty, 0);
-  const originalTotal = items.reduce(
-  (total, item) => total + (item.price / 0.75) * item.qty,
-  0
-);
-
-const savings = originalTotal - subtotal;
   const [scrolled, setScrolled] = useState(false);
 
   const videos: { src: string }[] = [
@@ -273,24 +267,11 @@ const savings = originalTotal - subtotal;
                   {/* PRICE BREAKDOWN */}
                   <div className="flex flex-col gap-2 text-sm text-black mb-6">
 
-                    {/* Original */}
-                    <div className="flex justify-between text-gray-400 line-through">
-                      <span>Original</span>
-                      <span>Rs {Math.round(originalTotal).toLocaleString()}</span>
-                    </div>
-
                     {/* Subtotal */}
                     <div className="flex justify-between font-semibold text-base">
                       <span>Subtotal</span>
                       <span>Rs {subtotal.toLocaleString()}</span>
                     </div>
-
-                    {/* Savings */}
-                    <div className="flex justify-between text-pink-600 text-xs font-medium">
-                      <span>You Saved</span>
-                      <span>Rs {Math.round(savings).toLocaleString()}</span>
-                    </div>
-
                   </div>
 
                   {/* CTA */}
@@ -299,11 +280,6 @@ const savings = originalTotal - subtotal;
                       Proceed to Checkout
                     </button>
                   </Link>
-
-                  {/* Urgency */}
-                  <p className="text-[10px] text-center text-pink-600 mt-3 font-medium">
-                    🎉 Anniversary Offer Applied — Limited Time Only
-                  </p>
 
                   {/* Note */}
                   <p className="text-[10px] text-center text-gray-400 mt-2">
@@ -348,55 +324,43 @@ const savings = originalTotal - subtotal;
             </div>
 
             {/* ================= LEFT CONTENT ================= */}
-            <div className="max-w-xl">
-              {/* Label */}
-              <p className="text-[10px] tracking-[0.5em] uppercase text-gray-500">
-                Kera Shine • Anniversary Edition
-              </p>
+            <div>
+              <p className="text-xs tracking-[0.45em] uppercase text-pink-400">
+                Professional Haircare
+                 </p>
 
-              {/* Heading */}
-              <h1 className="mt-6 text-[clamp(2.8rem,7vw,5.5rem)] font-semibold leading-[1.05] tracking-tight">
-                Stronger,
-                <br />
-                Shinier Hair
-              </h1>
+              <h1 className="mt-8 text-[clamp(2.4rem,8vw,5.5rem)] font-extrabold leading-[1.05]">
+                Salon-Grade Care
+                 <br />
+                <span className="bg-gradient-to-r from-pink-400 to-rose-500 bg-clip-text text-transparent">
+                  For Stronger, Shinier Hair
+                </span>
+                </h1>
 
-              {/* Description */}
-              <p className="mt-6 text-gray-400 text-lg leading-relaxed">
-                5 years of salon-grade formulas trusted by professionals.
-              </p>
-
-              {/* Offer */}
-              <p className="mt-3 text-pink-500 font-medium text-sm tracking-wide">
-                Anniversary Offer — Flat 25% OFF
-              </p>
+                <p className="mt-8 max-w-xl text-lg text-gray-300 leading-relaxed">
+                Crafted for salons and perfected for everyday use.
+                Premium formulas designed to restore, protect, and elevate every hair type.
+                 </p>
 
               {/* CTA */}
-              <div className="mt-10">
+              <div className="mt-12">
                 <a
                   href="#products"
-                  className="
-                    inline-flex items-center justify-center
-                    px-12 py-4 rounded-full
-                    bg-pink-600 text-white
-                    text-sm tracking-wide font-medium
-                    shadow-lg shadow-pink-600/20
-                    hover:bg-pink-700 hover:scale-[1.02]
-                    transition duration-300
-                  "
-                >
-                  Shop Now
-                </a>
+                  className="relative inline-flex w-full md:w-auto items-center justify-center
+                  px-12 py-4 rounded-full bg-white text-black
+                  shadow-[0_0_40px_rgba(236,72,153,0.35)]
+                  hover:bg-pink-600 hover:text-white
+                  transition" >
+                  Shop Hair Solutions
+                  </a>
               </div>
-
-              {/* Trust */}
-              <div className="mt-10 flex gap-8 text-[10px] tracking-[0.3em] uppercase text-gray-500">
+              {/* Trust points */}
+              <div className="mt-10 flex gap-6 md:gap-8 text-xs tracking-widest uppercase text-gray-400 flex-wrap">
                 <span>Salon Approved</span>
+                <span>Unisex</span>
                 <span>All Hair Types</span>
-                <span>Since 2021</span>
               </div>
-
-            </div>
+              </div>
 
             {/* ================= DESKTOP VIDEO ================= */}
             <div className="hidden md:flex justify-center">
@@ -624,9 +588,6 @@ const savings = originalTotal - subtotal;
           <div className="space-y-24 sm:space-y-32 lg:space-y-40">
 
             {signatureSets.map((set: SignatureSet, index: number) => {
-              const discountedPrice = Math.round(set.price * 0.75);
-              const savings = set.price - discountedPrice;
-
               return (
                 <div
                   key={set.id}
@@ -647,11 +608,6 @@ const savings = originalTotal - subtotal;
 
                   {/* IMAGE */}
                   <div className="relative flex flex-col items-center gap-4">
-
-                    {/* Discount Badge */}
-                    <span className="absolute top-4 right-4 bg-pink-600 text-white text-[10px] px-3 py-1 rounded-full tracking-widest">
-                      -25% OFF
-                    </span>
 
                     {/* Badge */}
                     <span className="inline-block bg-black/80 text-white
@@ -689,10 +645,6 @@ const savings = originalTotal - subtotal;
                         tracking-[0.35em] uppercase text-green-600">
                           Best Value
                         </span>
-
-                        <span className="block text-[11px] text-green-600 font-medium mt-2">
-                          Best Deal – Maximum Savings
-                        </span>
                       </>
                     )}
 
@@ -719,18 +671,8 @@ const savings = originalTotal - subtotal;
 
                       <div>
                         {/* Old */}
-                        <span className="text-sm text-gray-400 line-through block">
-                          PKR {set.price}
-                        </span>
-
-                        {/* New */}
                         <span className="text-2xl sm:text-3xl font-semibold text-gray-900">
-                          PKR {discountedPrice}
-                        </span>
-
-                        {/* Savings */}
-                        <span className="text-xs text-pink-600 font-medium block mt-1">
-                          You Save PKR {savings}
+                          PKR {set.price}
                         </span>
                       </div>
 
@@ -740,7 +682,7 @@ const savings = originalTotal - subtotal;
                           addToCart({
                             id: set.id,
                             name: set.name,
-                            price: discountedPrice, // 🔥 FIXED
+                            price: set.price, // 🔥 FIXED
                             image: set.image,
                             qty: 1,
                             type: "set",
@@ -757,7 +699,7 @@ const savings = originalTotal - subtotal;
                           transition duration-300
                         "
                       >
-                        Get This Set – 25% OFF
+                        Add Ritual
                       </button>
 
                     </div>
@@ -849,8 +791,7 @@ const savings = originalTotal - subtotal;
                         no-scrollbar px-20"
             >
               {products.map((product) => {
-                const discountedPrice = Math.round(product.price * 0.75);
-
+                
                 return (
                   <div
                     key={product.id}
@@ -861,11 +802,6 @@ const savings = originalTotal - subtotal;
                     transition-all duration-500
                     hover:-translate-y-4"
                   >
-
-                    {/* Discount Badge */}
-                    <div className="absolute top-4 right-4 bg-pink-600 text-white text-[10px] px-3 py-1 rounded-full tracking-widest">
-                      -25%
-                    </div>
 
                     {/* Gradient */}
                     <div
@@ -897,17 +833,10 @@ const savings = originalTotal - subtotal;
 
                       {/* Price */}
                       <div className="mt-5 flex flex-col items-center gap-1">
-                        <span className="text-sm text-gray-400 line-through">
+                        <span className="block mt-5 text-lg font-semibold text-gray-900">
                           PKR {product.price}
                         </span>
-
-                        <span className="text-xl font-semibold text-gray-900">
-                          PKR {discountedPrice}
-                        </span>
-
-                        <span className="text-[10px] text-pink-600 font-medium">
-                          You Save PKR {product.price - discountedPrice}
-                        </span>
+                        
                       </div>
 
                       {/* CTA */}
@@ -916,7 +845,7 @@ const savings = originalTotal - subtotal;
                           addToCart({
                             id: product.id,
                             name: product.name,
-                            price: discountedPrice, // 🔥 IMPORTANT FIX
+                            price: product.price, // 🔥 IMPORTANT FIX
                             image: product.image,
                             qty: 1,
                             type: "product",
@@ -927,7 +856,7 @@ const savings = originalTotal - subtotal;
                         py-4 text-xs tracking-widest uppercase font-semibold
                         shadow-lg hover:bg-pink-600 transition"
                       >
-                        Add to Cart – 25% OFF
+                        Add to Cart
                       </button>
                     </div>
                   </div>

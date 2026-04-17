@@ -34,13 +34,6 @@ export default function CartPage() {
     (total, item) => total + item.price * item.qty,
     0
   );
-  
-  const originalTotal = items.reduce(
-  (total, item) => total + (item.price / 0.75) * item.qty,
-  0
-);
-
-const savings = originalTotal - subtotal;
 
 const finalTotal = subtotal + 200;
 
@@ -279,19 +272,13 @@ Please confirm this order.
             {/* Original */}
             <div className="flex justify-between text-sm text-gray-400 line-through">
               <span>Original</span>
-              <span>Rs. {Math.round(originalTotal).toLocaleString()}</span>
+              <span>Rs. {Math.round(subtotal).toLocaleString()}</span>
             </div>
 
             {/* Discounted */}
             <div className="flex justify-between text-lg font-semibold text-gray-900">
               <span>Subtotal</span>
               <span>Rs. {subtotal.toLocaleString()}</span>
-            </div>
-
-            {/* Savings */}
-            <div className="flex justify-between text-pink-600 text-xs font-medium">
-              <span>You Saved</span>
-              <span>Rs. {Math.round(savings).toLocaleString()}</span>
             </div>
             
             {/* Delivery */}
