@@ -9,8 +9,10 @@ export type Product = {
   usage: string[];
   ingredients: string[];
   sizes: string[];
-  price: number; // for future ecommerce
+  price: number;
   bg: string;
+  inStock?: boolean;
+  stock?: number;
 };
 
 export type SignatureSet = {
@@ -22,6 +24,7 @@ export type SignatureSet = {
   type: "set";
   items: string[];
   sizes : string[];
+  inStock?: boolean;
 };
 
 export const products: Product[] = [
@@ -36,6 +39,7 @@ export const products: Product[] = [
     sizes: ["250ml"],
     price: 1500,
     bg: "from-pink-50 to-white",
+    inStock: false,
   },
   {
     id: "shampoo-500",
@@ -48,6 +52,7 @@ export const products: Product[] = [
     sizes: ["500ml"],
     price: 2000,
     bg: "from-pink-50 to-white",
+    inStock: false,
   },
   {
     id: "conditioner-250",
@@ -60,6 +65,7 @@ export const products: Product[] = [
     sizes: ["250ml"],
     price: 1500,
     bg: "from-rose-50 to-white",
+    inStock: false,
   },
   {
     id: "conditioner-500",
@@ -72,6 +78,7 @@ export const products: Product[] = [
     sizes: ["500ml"],
     price: 2000,
     bg: "from-rose-50 to-white",
+    inStock: false,
   },
   {
     id: "hair-mask-300",
@@ -84,6 +91,7 @@ export const products: Product[] = [
     sizes: ["300ml"],
     price: 1500,
     bg: "from-gray-50 to-white",
+    inStock: false,
   },
   {
     id: "hair-mask-500",
@@ -96,6 +104,7 @@ export const products: Product[] = [
     sizes: ["500ml"],
     price: 2000,
     bg: "from-gray-50 to-white",
+    inStock: false,
   },
   {
     id: "serum",
@@ -108,8 +117,10 @@ export const products: Product[] = [
     sizes: ["60ml"],
     price: 1200,
     bg: "from-yellow-50 to-white",
+    inStock: false,
   },
 ];
+
 export const signatureSets: SignatureSet[] = [
   {
     id: "set-small",
@@ -125,6 +136,7 @@ export const signatureSets: SignatureSet[] = [
       "Serum 60ml",
     ],
     sizes : ["250ml"],
+    inStock: false,
   },
   {
     id: "set-large",
@@ -140,7 +152,6 @@ export const signatureSets: SignatureSet[] = [
       "Serum 60ml",
     ],
     sizes : ["500ml"],
+    inStock: false,
   },
 ];
-
-
