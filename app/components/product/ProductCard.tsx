@@ -11,8 +11,8 @@ type Props = {
 export default function ProductCard({ product }: Props) {
   const { addToCart } = useCart();
 
-  // Out of stock check - stock 0 ho ya inStock false ho
-  const isOutOfStock = (product as any).stock === 0 || product.inStock === false;
+  // Out of stock check
+  const isOutOfStock = product.stock === 0 || product.inStock === false;
 
   return (
     <div className="group relative rounded-3xl border border-gray-100 bg-white p-6 transition hover:shadow-xl">
