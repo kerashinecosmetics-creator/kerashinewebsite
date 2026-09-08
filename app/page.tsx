@@ -906,14 +906,14 @@ export default function Home() {
             </h2>
 
             <p className="mt-8 text-lg text-gray-700 leading-relaxed max-w-lg">
-              What started at{" "}
+              Born from a passion for healthy, beautiful hair —{" "}
               <span className="font-semibold text-pink-600">
-                Umani Beauty Salon
+                KERA SHINE
               </span>{" "}
-              has now become a movement in haircare.
+              was created to redefine everyday haircare.
               <br /><br />
-              With passion and expertise, our brand was created to empower individuals
-              to shine every day — with elegance, confidence, and grace.
+              We believe great hair is not just about looking good, it's about feeling confident. 
+              Our salon-grade formulas are crafted to restore strength, shine, and elegance — for every hair type, every day.
             </p>
           </motion.div>
 
