@@ -593,6 +593,7 @@ export default function Home() {
           <div className="space-y-24 sm:space-y-32 lg:space-y-40">
 
             {signatureSets.map((set: SignatureSet, index: number) => {
+              const isOutOfStock = set.inStock === false;
               return (
                 <div
                   key={set.id}
@@ -684,6 +685,7 @@ export default function Home() {
 
                       {/* CTA */}
                       <button
+                        disabled={isOutOfStock}
                         onClick={() =>
                           addToCart({
                             id: set.id,
@@ -701,11 +703,11 @@ export default function Home() {
                           px-10 py-4
                           text-xs text-white tracking-widest uppercase font-semibold
                           shadow-xl
-                          hover:bg-pink-600 hover:scale-[1.05]
+                          ${isOutOfStock? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-black text-white hover:bg-pink-600 hover:scale-[1.05]'}
                           transition duration-300
                         "
                       >
-                        Add Ritual
+                        {isOutOfStock? 'Out of Stock' : 'Add Ritual'}
                       </button>
 
                     </div>
@@ -797,7 +799,7 @@ export default function Home() {
                         no-scrollbar px-20"
             >
               {products.map((product) => {
-                
+                const isOutOfStock = product.inStock === false;
                 return (
                   <div
                     key={product.id}
@@ -848,6 +850,7 @@ export default function Home() {
 
                       {/* CTA */}
                       <button
+                        disabled={isOutOfStock}
                         onClick={() =>
                           addToCart({
                             id: product.id,
@@ -863,7 +866,7 @@ export default function Home() {
                         py-4 text-xs tracking-widest uppercase font-semibold
                         shadow-lg hover:bg-pink-600 transition"
                       >
-                        Add to Cart
+                        {isOutOfStock? 'Out of Stock' : 'Add to Cart'}
                       </button>
                     </div>
                   </div>
