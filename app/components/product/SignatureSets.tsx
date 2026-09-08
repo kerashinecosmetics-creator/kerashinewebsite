@@ -5,6 +5,10 @@ import { useCart } from "@/app/context/CartContext";
 export default function SignatureSets() {
   const { addToCart } = useCart();
 
+  // Yahan se control karo kaunsa set out of stock hai
+  const smallOutOfStock = true; // true = out of stock, false = in stock
+  const largeOutOfStock = false;
+
   return (
     <section
       className="relative py-40 overflow-hidden
@@ -12,7 +16,7 @@ export default function SignatureSets() {
     >
       {/* Ambient layers */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-pink-200/25 blur-[150px]" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w- h- bg-pink-200/25 blur-" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
@@ -39,7 +43,14 @@ export default function SignatureSets() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
 
           {/* SMALL SET */}
-          <div className="rounded-[40px] bg-white shadow-xl p-16 flex flex-col justify-between">
+          <div className={`relative rounded- bg-white shadow-xl p-16 flex flex-col justify-between transition ${smallOutOfStock? 'opacity-60 grayscale' : ''}`}>
+
+            {smallOutOfStock && (
+              <span className="absolute left-10 top-10 z-10 rounded-full bg-red-500 px-4 py-1.5 text-xs font-medium text-white">
+                Out of Stock
+              </span>
+            )}
+
             <div>
               <span className="text-xs tracking-[0.4em] uppercase text-pink-500">
                 Most Loved
@@ -67,7 +78,9 @@ export default function SignatureSets() {
               </span>
 
               <button
+                disabled={smallOutOfStock}
                 onClick={() =>
+                 !smallOutOfStock &&
                   addToCart({
                     id: "set-small",
                     name: "Signature Care Set — Small",
@@ -76,16 +89,25 @@ export default function SignatureSets() {
                     type: "set",
                   })
                 }
-                className="rounded-full bg-pink-600 px-10 py-4 text-white font-semibold
-                           shadow-lg hover:bg-pink-700 hover:scale-[1.04] transition"
+                className={`rounded-full px-10 py-4 font-semibold shadow-lg transition
+                  ${smallOutOfStock
+                   ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    : 'bg-pink-600 text-white hover:bg-pink-700 hover:scale-[1.04]'}`}
               >
-                Add Set
+                {smallOutOfStock? 'Out of Stock' : 'Add Set'}
               </button>
             </div>
           </div>
 
           {/* LARGE SET */}
-          <div className="rounded-[40px] bg-white shadow-xl p-16 flex flex-col justify-between">
+          <div className={`relative rounded- bg-white shadow-xl p-16 flex flex-col justify-between transition ${largeOutOfStock? 'opacity-60 grayscale' : ''}`}>
+
+            {largeOutOfStock && (
+              <span className="absolute left-10 top-10 z-10 rounded-full bg-red-500 px-4 py-1.5 text-xs font-medium text-white">
+                Out of Stock
+              </span>
+            )}
+
             <div>
               <h3 className="text-3xl font-serif text-gray-900">
                 Signature Care Set — Large
@@ -109,7 +131,9 @@ export default function SignatureSets() {
               </span>
 
               <button
+                disabled={largeOutOfStock}
                 onClick={() =>
+                 !largeOutOfStock &&
                   addToCart({
                     id: "set-large",
                     name: "Signature Care Set — Large",
@@ -118,10 +142,12 @@ export default function SignatureSets() {
                     type: "set",
                   })
                 }
-                className="rounded-full bg-pink-600 px-10 py-4 text-white font-semibold
-                           hover:bg-pink-700 transition"
+                className={`rounded-full px-10 py-4 font-semibold transition
+                  ${largeOutOfStock
+                   ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    : 'bg-pink-600 text-white hover:bg-pink-700'}`}
               >
-                Add Set
+                {largeOutOfStock? 'Out of Stock' : 'Add Set'}
               </button>
             </div>
           </div>
