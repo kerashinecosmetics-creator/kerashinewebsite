@@ -1,63 +1,20 @@
 @import "tailwindcss";
-@import "@fortawesome/fontawesome-free/css/all.min.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --font-geist-sans: var(--font-geist-sans);
-  --font-geist-mono: var(--font-geist-mono);
+@theme {
+  --color-ink: #121212;
+  --color-gold: #C9A96E;
+  --color-beige: #E8D5C4;
+  --color-cream: #FAF6F1;
+  --font-sans: var(--font-poppins), system-ui, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: auto;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-}
-
-/* Custom Animations */
-@keyframes shimmer {
-  100% { transform: translateX(200%); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-fadeIn {
-  animation: fadeIn 1s ease forwards;
-}
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-fadeInUp {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-/* Inputs - @apply ko direct CSS me convert */
-.input {
-  width: 100%;
-  border-radius: 9999px;
-  border: 1px solid #e5e7eb;
-  padding: 0.75rem 1.25rem;
-  font-size: 0.875rem;
-  outline: none;
-  transition: all 0.2s;
-}
-.input:focus {
-  border-color: #db2777;
-}
-
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+  background-color: #FAF6F1;
+  color: #121212;
+  overflow-x: hidden;
 }

@@ -1,38 +1,40 @@
-// app/layout.tsx
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Playfair_Display, Poppins } from "next/font/google";
+import Blobs from "./components/Blobs";
+import FloatingWhatsApp from "./components/FloatingWhatsApp";
+import Loader from "./components/Loader";
+import SmoothScroll from "./components/SmoothScroll";
 import "./globals.css";
-import { CartProvider } from "@/app/context/CartContext";
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
-// ✅ Fonts
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const poppins = Poppins({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-poppins",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const playfair = Playfair_Display({
   subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
 });
 
-// ✅ SEO Metadata
 export const metadata: Metadata = {
-  title: "KeraShine",
-  description: "Premium Haircare Products",
+  title: "KeraShine Cosmetics | Hair Care, Skin Care & Private Label, Karachi",
+  description:
+    "KeraShine is a Karachi-based cosmetics manufacturer offering premium hair care, skin care, private label production and distribution partnerships.",
 };
 
-// ✅ Root Layout
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export const viewport: Viewport = { themeColor: "#FAF6F1" };
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
-      >
-         <CartProvider>{children}</CartProvider>
-         <SpeedInsights />
+    <html lang="en" className={`${poppins.variable} ${playfair.variable}`}>
+      <body className="font-sans">
+        <Loader />
+        <Blobs />
+        <SmoothScroll>{children}</SmoothScroll>
+        <FloatingWhatsApp />
       </body>
     </html>
   );
