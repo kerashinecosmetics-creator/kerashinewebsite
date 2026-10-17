@@ -7,17 +7,23 @@ export default function CountUp({
   to,
   suffix = "",
   duration = 2,
+  decimals = 0,
   className,
 }: {
   to: number;
   suffix?: string;
   duration?: number;
+  decimals?: number;
   className?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const value = useMotionValue(0);
-  const text = useTransform(value, (v) => Math.round(v) + suffix);
+  
+  const text = useTransform(value, (v) => {
+    const formatted = decimals > 0 ? v.toFixed(decimals) : Math.round(v).toString();
+    return formatted + suffix;
+  });
 
   useEffect(() => {
     if (!inView) return;
