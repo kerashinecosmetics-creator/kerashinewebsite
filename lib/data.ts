@@ -1,4 +1,4 @@
-export type Category = "Hair Care" | "Private Label";
+export type Category = "Hair Care" | "Private Label" | "Signature Set" | "Daily Care";
 
 export type Product = {
   id: string;
