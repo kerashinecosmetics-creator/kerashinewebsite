@@ -13,7 +13,7 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
-    window.lenis = lenis;
+    (window as any).lenis = lenis;
 
     let raf = 0;
     const loop = (time: number) => {
@@ -25,7 +25,7 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     return () => {
       cancelAnimationFrame(raf);
       lenis.destroy();
-      window.lenis = undefined;
+      (window as any).lenis = undefined;
     };
   }, []);
 

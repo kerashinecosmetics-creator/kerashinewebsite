@@ -14,13 +14,13 @@ function ProductModal({ product, onClose }: { product: Product; onClose: () => v
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    window.lenis?.stop();
+    (window as any).lenis?.stop();
     document.documentElement.style.overflow = "hidden";
     closeRef.current?.focus();
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
     return () => {
-      window.lenis?.start();
+      (window as any).lenis?.start();
       document.documentElement.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };

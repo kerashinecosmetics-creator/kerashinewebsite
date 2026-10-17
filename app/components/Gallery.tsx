@@ -18,7 +18,7 @@ export default function Gallery() {
 
   useEffect(() => {
     if (open === null) return;
-    window.lenis?.stop();
+    (window as any).lenis?.stop();
     document.documentElement.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
@@ -27,7 +27,7 @@ export default function Gallery() {
     };
     window.addEventListener("keydown", onKey);
     return () => {
-      window.lenis?.start();
+      (window as any).lenis?.start();
       document.documentElement.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };

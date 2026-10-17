@@ -69,7 +69,7 @@ export default function Navbar() {
           onClick={(e) => {
             e.preventDefault();
             setOpen(false);
-            if (window.lenis) window.lenis.scrollTo(0, { duration: 1.5 });
+            if (window.lenis) (window as any).lenis.scrollTo(0, { duration: 1.5 });
             else window.scrollTo({ top: 0, behavior: "smooth" });
           }}
           className="focus-ring relative z-[60] font-serif text-2xl font-semibold tracking-[0.22em] text-ink"
