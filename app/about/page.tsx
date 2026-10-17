@@ -20,7 +20,7 @@ export default function AboutPage() {
     <>
       <section className="relative isolate flex min-h-[80svh] items-end overflow-hidden px-5 pb-20 pt-40 md:px-10">
         <Image
-          src="/images/lab-texture.png"
+          src="/images/lab-texture.webp"
           alt=""
           fill
           priority
@@ -68,7 +68,7 @@ export default function AboutPage() {
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
             >
               <Image
-                src="/images/model-hair.png"
+                src="/images/model-hair.webp"
                 alt="Model with glossy hair"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"

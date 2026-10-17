@@ -10,8 +10,8 @@ import SectionHeading from "./SectionHeading";
 
 const info = [
   { icon: MapPin, label: "Karachi, Sindh, Pakistan" },
-  { icon: Phone, label: "+92 300 0000000" },
-  { icon: Mail, label: "partners@kerashine.com" },
+  { icon: Phone, label: "+92 326 8681026" },
+  { icon: Mail, label: "kerashinecosmetics@gmail.com" },
   { icon: Clock, label: "Mon to Sat, 9:00 to 18:00" },
 ];
 

@@ -6,7 +6,7 @@ import { products } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Collection",
-  description: "The full KeraShine range: shampoo, conditioner, gloss serum and Signature Sets in 250 ml and 500 ml.",
+  description: "The full KeraShine range: shampoo, conditioner, gloss serum, hair mask and Signature Sets in 250 ml and 500 ml.",
 };
 
 export default function CollectionPage() {
@@ -16,7 +16,12 @@ export default function CollectionPage() {
   return (
     <>
       <section className="relative isolate overflow-hidden px-5 pb-16 pt-40 md:px-10 md:pt-48">
-        <MotionDiv aria-hidden="true" className="absolute -right-40 top-0 -z-10 h- w- rounded-full bg-champagne/50 blur-3xl" animate={{ x: [0, -60, 0], y: [0, 40, 0] }} transition={{ duration: 14, ease: "easeInOut", repeat: Infinity }} />
+        <MotionDiv 
+          aria-hidden="true" 
+          className="absolute -right-40 top-0 -z-10 h- w- rounded-full bg-champagne/50 blur-3xl" 
+          animate={{ x: [0, -60, 0], y: [0, 40, 0] }} 
+          transition={{ duration: 14, ease: "easeInOut", repeat: Infinity }} 
+        />
         <div className="mx-auto max-w-6xl">
           <MotionH1 className="font-display text-[clamp(3.2rem,11vw,10rem)] font-extrabold leading-[0.86] tracking-tighter text-ink" initial={{ opacity: 0, y: 70 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}>The Collection</MotionH1>
           <Reveal delay={0.2}><p className="mt-8 max-w-xl text-lg leading-relaxed text-ink/70">One formula across every product, so each step reinforces the last. Select a product to see its full specification sheet.</p></Reveal>

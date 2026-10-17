@@ -20,7 +20,7 @@ export default function Hero() {
   const fade = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
-    <section id="home" ref={ref} className="relative flex min-h-[100svh] items-center overflow-hidden px-5 pb-24 pt-32 md:px-10">
+    <section id="home" ref={ref} className="relative flex min-h- items-center overflow-hidden px-5 pb-24 pt-32 md:px-10">
       <div className="container-x grid items-center gap-16 lg:grid-cols-[1.1fr_0.9fr]">
         <motion.div style={{ y: yText, opacity: fade }} className="will-change-transform">
           <motion.p
@@ -53,8 +53,8 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: START + 0.7, ease: EASE }}
           >
-            KeraShine formulates and manufactures premium hair care, skin care and private label cosmetics for salons,
-            retailers and growing brands, from our laboratory in Karachi.
+            KeraShine formulates and manufactures premium hair care for salons,
+            retailers and growing brands, from our laboratory in Karachi. Now live with 4 hero products.
           </motion.p>
 
           <motion.div
@@ -70,7 +70,7 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Parallax collage */}
+        {/* Parallax collage - NOW WITH REAL PRODUCTS */}
         <div className="relative mx-auto h-[min(70vh,600px)] w-full max-w-md lg:max-w-none">
           <motion.div
             style={{ y: yBottle }}
@@ -80,8 +80,8 @@ export default function Hero() {
             transition={{ duration: 1.2, delay: START + 0.2, ease: EASE }}
           >
             <Image
-              src="/images/hero-bottle.png"
-              alt="KeraShine hair care bottle"
+              src="/images/keratin-shampoo.webp"
+              alt="KeraShine Keratin Shampoo"
               fill
               priority
               sizes="(min-width: 1024px) 30vw, 70vw"
@@ -91,23 +91,23 @@ export default function Hero() {
 
           <motion.div style={{ y: yCardA }} className="absolute -left-2 top-[8%] h-36 w-28 will-change-transform sm:h-44 sm:w-36 lg:-left-10">
             <motion.div
-              className="relative h-full w-full overflow-hidden rounded-3xl border-4 border-cream shadow-soft"
+              className="relative h-full w-full overflow-hidden rounded-3xl border-4 border-cream bg-white shadow-soft"
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: START + 0.6, ease: EASE }}
             >
-              <Image src="/images/model-hair.png" alt="Healthy glossy hair" fill sizes="160px" className="object-cover" />
+              <Image src="/images/silk-conditioner.webp" alt="Silk Conditioner" fill sizes="160px" className="object-contain p-3" />
             </motion.div>
           </motion.div>
 
           <motion.div style={{ y: yCardB }} className="absolute -right-2 bottom-[6%] h-40 w-32 will-change-transform sm:h-52 sm:w-40 lg:-right-8">
             <motion.div
-              className="relative h-full w-full overflow-hidden rounded-3xl border-4 border-cream shadow-soft"
+              className="relative h-full w-full overflow-hidden rounded-3xl border-4 border-cream bg-white shadow-soft"
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: START + 0.8, ease: EASE }}
             >
-              <Image src="/images/ritual-set.png" alt="KeraShine product set" fill sizes="180px" className="object-cover" />
+              <Image src="/images/hair-mask.webp" alt="KeraShine Hair Mask" fill sizes="180px" className="object-contain p-3" />
             </motion.div>
           </motion.div>
 
@@ -120,8 +120,8 @@ export default function Hero() {
               y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: START + 1.5 },
             }}
           >
-            <p className="font-serif text-xl text-ink">Made in Karachi</p>
-            <p className="text-xs text-ink/55">In-house lab and factory</p>
+            <p className="font-serif text-xl text-ink">4 Products Live</p>
+            <p className="text-xs text-ink/55">Shampoo · Conditioner · Serum · Mask</p>
           </motion.div>
         </div>
       </div>

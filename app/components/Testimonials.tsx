@@ -8,7 +8,6 @@ function Track({ children, duration, reverse = false }: { children: ReactNode; d
     <div className={`marquee overflow-hidden ${reverse ? "marquee-reverse" : ""}`}>
       <div className="marquee-track" style={{ "--marquee-duration": `${duration}s` } as CSSProperties}>
         {children}
-        {/* identical copy for a seamless loop */}
         <div aria-hidden="true" className="flex">
           {children}
         </div>
@@ -18,6 +17,10 @@ function Track({ children, duration, reverse = false }: { children: ReactNode; d
 }
 
 export default function Testimonials() {
+  // HIDDEN FOR NOW - data lib/data.ts mein safe hai
+  return null;
+
+  // Neeche wala code abhi render nahi hoga
   const logos = (
     <div className="flex">
       {clients.map((c) => (
@@ -30,10 +33,7 @@ export default function Testimonials() {
   const cards = (
     <div className="flex gap-6 pr-6">
       {testimonials.map((t) => (
-        <figure
-          key={t.name}
-          className="w-[22rem] shrink-0 rounded-[2.5rem] border border-ink/5 bg-white p-8 shadow-soft transition-transform duration-500 hover:-translate-y-2 md:w-[26rem]"
-        >
+        <figure key={t.name} className="w- shrink-0 rounded-[2.5rem] border border-ink/5 bg-white p-8 shadow-soft transition-transform duration-500 hover:-translate-y-2 md:w-">
           <Quote className="text-gold" size={28} />
           <blockquote className="mt-4 leading-relaxed text-ink/75">{t.quote}</blockquote>
           <figcaption className="mt-6">
@@ -54,9 +54,7 @@ export default function Testimonials() {
       </div>
       <div className="mt-16 space-y-12">
         <Track duration={45}>{logos}</Track>
-        <Track duration={70} reverse>
-          {cards}
-        </Track>
+        <Track duration={70} reverse>{cards}</Track>
       </div>
     </section>
   );

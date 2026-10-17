@@ -1,27 +1,45 @@
 "use client";
 
 import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 import { scrollToId } from "@/lib/scroll";
 
 const nav = [
-  { id: "about", label: "About us" },
-  { id: "process", label: "Our process" },
-  { id: "products", label: "Products" },
-  { id: "services", label: "Services" },
+  { id: "about", label: "About us", href: "/#about", isSection: true },
+  { id: "process", label: "Our process", href: "/#process", isSection: true },
+  { id: "products", label: "Products", href: "/#products", isSection: true },
+  { id: "technology", label: "Technology", href: "/technology", isSection: false },
 ];
 const more = [
-  { id: "gallery", label: "Gallery" },
-  { id: "testimonials", label: "Clients" },
-  { id: "contact", label: "Become a partner" },
-];
-const socials = [
-  { icon: Instagram, label: "Instagram", href: "https://instagram.com" },
-  { icon: Facebook, label: "Facebook", href: "https://facebook.com" },
-  { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com" },
-  { icon: Youtube, label: "YouTube", href: "https://youtube.com" },
+  { id: "collection", label: "Collection", href: "/collection", isSection: false },
+  { id: "contact", label: "Become a partner", href: "/contact", isSection: false },
+  { id: "services", label: "Services", href: "/#services", isSection: true },
 ];
 
-function LinkList({ title, items }: { title: string; items: { id: string; label: string }[] }) {
+const socials = [
+  { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/kerashine_cosmetics/" },
+  { icon: Facebook, label: "Facebook", href: "https://www.facebook.com/kerashine_cosmetics/" },
+  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/kerashine-cosmetics/" },
+  { icon: Youtube, label: "YouTube", href: "https://www.youtube.com/@kerashinecosmetics" },
+];
+
+function LinkList({ title, items }: { title: string; items: { id: string; label: string; href: string; isSection: boolean }[] }) {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const handleClick = (e: React.MouseEvent, item: typeof items[0]) => {
+    e.preventDefault();
+    if (item.isSection) {
+      if (pathname === "/") {
+        scrollToId(item.id);
+      } else {
+        router.push(item.href);
+      }
+    } else {
+      router.push(item.href);
+    }
+  };
+
   return (
     <div>
       <p className="font-serif text-xl text-white">{title}</p>
@@ -29,11 +47,8 @@ function LinkList({ title, items }: { title: string; items: { id: string; label:
         {items.map((l) => (
           <li key={l.id}>
             <a
-              href={`#${l.id}`}
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToId(l.id);
-              }}
+              href={l.href}
+              onClick={(e) => handleClick(e, l)}
               className="focus-ring rounded text-white/60 transition-colors hover:text-gold"
             >
               {l.label}
@@ -76,8 +91,8 @@ export default function Footer() {
           <p className="font-serif text-xl text-white">Contact</p>
           <address className="mt-5 space-y-3 not-italic text-white/60">
             <p>Karachi, Sindh, Pakistan</p>
-            <p>+92 300 0000000</p>
-            <p>partners@kerashine.com</p>
+            <p>+92 326 8681026</p>
+            <p>kerashinecosmetics@gmail.com</p>
           </address>
         </div>
       </div>
@@ -88,7 +103,7 @@ export default function Footer() {
 
       <div className="container-x mt-8 flex flex-col justify-between gap-2 border-t border-white/10 pt-6 text-sm text-white/40 md:flex-row">
         <p>© {new Date().getFullYear()} KeraShine Cosmetics. All rights reserved.</p>
-        <p>Business portfolio website. Not an online store.</p>
+        <p>4 Products Live · Business portfolio website</p>
       </div>
     </footer>
   );

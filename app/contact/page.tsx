@@ -56,7 +56,7 @@ export default function ContactPage() {
           >
             <p className="font-display text-xl font-bold text-ink">KeraShine Laboratory</p>
             <p className="mt-2 text-ink/70">Karachi, Sindh, Pakistan</p>
-            <p className="mt-4 text-ink/70">distributors@kerashine.example</p>
+            <p className="mt-4 text-ink/70">kerashinecosmetics@gmail.com</p>
           </motion.div>
         </div>
 

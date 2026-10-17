@@ -70,7 +70,7 @@ export const products: Product[] = [
     tagline: "A sulfate-free cleanse that keeps keratin where it belongs.",
     description:
       "Cleanses without stripping. Hydrolyzed keratin fills rough spots along the strand while argan oil and biotin keep the cuticle smooth, so hair dries glossy, not squeaky.",
-    image: "/images/hero-bottle.png",
+    image: "/images/keratin-shampoo.webp",
     accent: "#D9B38C",
     ...FORMULA,
     sulfateFree: true,
@@ -94,7 +94,7 @@ export const products: Product[] = [
     tagline: "Lengths that detangle in seconds and stay smooth for two days.",
     description:
       "The second half of the system. It seals the cuticle after cleansing and locks in the keratin and argan oil, which is where the 48-hour shine comes from.",
-    image: "/images/hero-bottle.png",
+    image: "/images/silk-conditioner.webp",
     accent: "#E8A6B6",
     ...FORMULA,
     sulfateFree: true,
@@ -118,7 +118,7 @@ export const products: Product[] = [
     tagline: "The finishing coat. Two pumps, mirror shine.",
     description:
       "A weightless finishing serum built on argan oil. Apply to damp or dry hair to tame frizz, protect against heat, and add the final layer of shine.",
-    image: "/images/hero-bottle.png",
+    image: "/images/gloss-serum.webp",
     accent: "#B9A4F5",
     ...FORMULA,
     sulfateFree: true,
@@ -135,6 +135,30 @@ export const products: Product[] = [
     ],
   },
   {
+    id: "hair-mask",
+    name: "Keratin Hair Mask",
+    category: "Daily Care",
+    size: "200 ml",
+    tagline: "Deep repair for dry, damaged lengths.",
+    description:
+      "A rich, intensive mask that restores elasticity and shine. Use once a week for hair that feels salon-repaired.",
+    image: "/images/hair-mask.webp",
+    accent: "#C8B8A0",
+    ...FORMULA,
+    sulfateFree: true,
+    highlights: [
+      "Deep conditioning without weighing hair down",
+      "Repairs damage from heat and color",
+      "Same 15% keratin base as shampoo",
+    ],
+    specs: specs("200 ml", "Jar, recyclable PET", "Once a week"),
+    ritual: [
+      { title: "Shampoo first", text: "Cleanse with Keratin Repair Shampoo and rinse." },
+      { title: "Apply generously", text: "Work mask through mid-lengths to ends." },
+      { title: "Leave 5 minutes", text: "Rinse thoroughly with cool water." },
+    ],
+  },
+  {
     id: "signature-small",
     name: "Signature Set: Small",
     category: "Signature Set",
@@ -142,7 +166,7 @@ export const products: Product[] = [
     tagline: "The full ritual in a gift-ready box.",
     description:
       "Shampoo, conditioner and serum together in the 250 ml size. The right starting point for trying the system, or for gifting.",
-    image: "/images/ritual-set.png",
+    image: "/images/signature-small.webp",
     accent: "#D9B38C",
     ...FORMULA,
     sulfateFree: true,
@@ -167,7 +191,7 @@ export const products: Product[] = [
     tagline: "Salon-size. Built for long hair and loyal routines.",
     description:
       "Double-size shampoo and conditioner with the 100 ml serum. Made for long or thick hair, shared households and salon back-bars.",
-    image: "/images/ritual-set.png",
+    image: "/images/signature-large.webp",
     accent: "#E8A6B6",
     ...FORMULA,
     sulfateFree: true,
