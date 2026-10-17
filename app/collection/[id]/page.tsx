@@ -8,20 +8,24 @@ import { MotionDiv, MotionH1, Reveal } from "@/app/components/motion";
 import Tilt from "@/app/components/Tilt";
 import { getProduct, products } from "@/lib/products";
 
-type Props = { params: { id: string } };
+type Props = {
+  params: Promise<{ id: string }>
+}
 
 export function generateStaticParams() {
   return products.map((p) => ({ id: p.id }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const product = getProduct(params.id);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const product = getProduct(id);
   if (!product) return { title: "Product not found" };
   return { title: product.name, description: product.tagline };
 }
 
-export default function ProductPage({ params }: Props) {
-  const product = getProduct(params.id);
+export default async function ProductPage({ params }: Props) {
+  const { id } = await params;
+  const product = getProduct(id);
   if (!product) notFound();
 
   const index = products.findIndex((p) => p.id === product.id);
@@ -29,7 +33,7 @@ export default function ProductPage({ params }: Props) {
   const next = products[(index + 1) % products.length];
 
   const keyFigures = [
-    { node: <CountUp to={product.ph} decimals={1} />, label: "pH level" },
+    { node: <>{product.ph}</>, label: "pH level" },
     { node: <>{product.sulfateFree ? "0%" : "—"}</>, label: "Sulfates" },
     { node: <CountUp to={product.keratin} suffix="%" />, label: "Hydrolyzed keratin" },
     { node: <CountUp to={product.shineHours} suffix="h" />, label: "Shine duration" },

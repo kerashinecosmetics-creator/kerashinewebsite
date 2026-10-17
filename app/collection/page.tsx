@@ -18,7 +18,7 @@ export default function CollectionPage() {
       <section className="relative isolate overflow-hidden px-5 pb-16 pt-40 md:px-10 md:pt-48">
         <MotionDiv
           aria-hidden="true"
-          className="absolute -right-40 top-0 -z-10 h-[30rem] w-[30rem] rounded-full bg-champagne/50 blur-3xl"
+          className="absolute -right-40 top-0 -z-10 h- w- rounded-full bg-champagne/50 blur-3xl"
           animate={{ x: [0, -60, 0], y: [0, 40, 0] }}
           transition={{ duration: 14, ease: "easeInOut", repeat: Infinity }}
         />
