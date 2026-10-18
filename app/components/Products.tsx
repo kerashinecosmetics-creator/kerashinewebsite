@@ -167,13 +167,13 @@ export default function Products() {
                         {p.category}
                       </span>
                     </div>
-                    <div className="p-7">
+                    <div className="p-7 flex flex-col min-h-">
                       <h3 className="font-serif text-2xl font-medium text-ink">{p.name}</h3>
-                      <p className="mt-2 text-ink/60">{p.short}</p>
-                      <p className="mt-5 text-sm font-medium text-gold transition-transform duration-300 group-hover:translate-x-1">
+                      <p className="mt-2 text-ink/60 flex-1">{p.short}</p>
+                      <p className="mt-auto pt-5 text-sm font-medium text-gold transition-transform duration-300 group-hover:translate-x-1">
                         View details
                       </p>
-                    </div>
+                    </div>  
                   </button>
                 </Tilt>
               </motion.div>

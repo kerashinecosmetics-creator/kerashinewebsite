@@ -80,37 +80,37 @@ export default function AboutPage() {
       </section>
 
       {/* Lab numbers */}
-      <section className="px-3 pb-24 md:px-6">
-        <div className="mx-auto grid max-w-6xl gap-px overflow-hidden rounded-[2.5rem] bg-white/10 md:grid-cols-3">
+      <section className="px-3 pb-12 md:px-6">
+        <div className="mx-auto grid max-w-6xl gap-4 overflow-hidden rounded-[2.5rem] bg-ink/5 p-2 md:grid-cols-3">
           {[
-            { to: 5.2, d: 1, s: "", label: "pH on every batch" },
-            { to: 0, d: 0, s: "%", label: "Sulfates, ever" },
-            { to: 100, d: 0, s: "%", label: "Made in Karachi" },
+            { to: 5.2, d: 1, s: "", label: "pH on every batch", sub: "Balanced for scalp" },
+            { to: 0, d: 0, s: "%", label: "Sulfates, ever", sub: "0% harsh sulfates" },
+            { to: 100, d: 0, s: "%", label: "Made in Karachi", sub: "Lab-tested locally" },
           ].map((n, i) => (
             <MotionDiv
               key={n.label}
-              className="bg-ink px-8 py-14 text-center text-pearl"
-              whileHover={{ scale: 1.05, backgroundColor: "#2A1342" }}
+              className="rounded-[2rem] bg-[#111] px-8 py-14 text-center border border-white/10"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: i * 0.12 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.7, delay: i * 0.25 }}
             >
-              <p className="font-display text-6xl font-extrabold tracking-tighter text-champagne md:text-8xl">
+              <p className="font-display text-6xl font-extrabold tracking-tighter md:text-7xl" style={{color:'#fff'}}>
                 <CountUp to={n.to} decimals={n.d} suffix={n.s} />
               </p>
-              <p className="mt-3 font-semibold text-pearl/70">{n.label}</p>
+              <p className="mt-3 font-semibold" style={{color:'#fff'}}>{n.label}</p>
+              <p className="mt-1 text-sm" style={{color:'rgba(255,255,255,0.7)'}}>{n.sub}</p>
             </MotionDiv>
           ))}
         </div>
       </section>
 
-      <section className="px-5 pb-28 md:px-10 md:pb-36">
+      <section className="px-5 pt-24 pb-28 md:px-10 md:pt-32 md:pb-36">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <h2 className="font-display text-4xl font-extrabold tracking-tighter text-ink md:text-6xl">What we stand for.</h2>
           </Reveal>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
             {values.map((v, i) => (
               <Reveal key={v.title} delay={i * 0.12}>
                 <MotionDiv
@@ -124,8 +124,8 @@ export default function AboutPage() {
               </Reveal>
             ))}
           </div>
-          <Reveal className="mt-14 text-center">
-            <Button href="/contact">Work with us</Button>
+          <Reveal className="mt-16 text-center">
+            <Button href="/contact" variant="gold" className="px-10 py-5 text-base !text-ink">Work with us — Start distribution</Button>
           </Reveal>
         </div>
       </section>

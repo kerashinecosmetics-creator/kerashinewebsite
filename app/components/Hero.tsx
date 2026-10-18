@@ -64,9 +64,6 @@ export default function Hero() {
             transition={{ duration: 0.9, delay: START + 0.9, ease: EASE }}
           >
             <Button href="#products">Explore Products</Button>
-            <Button href="#contact" variant="outline">
-              Become a Distributor
-            </Button>
           </motion.div>
         </motion.div>
 
@@ -112,7 +109,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            className="absolute -bottom-2 left-[6%] rounded-2xl border border-white/70 bg-white/70 px-5 py-4 shadow-soft backdrop-blur-xl"
+            className="absolute -bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-3 rounded-full border border-ink/10 bg-white/90 px-5 py-3 shadow-soft backdrop-blur-xl lg:left-[8%] lg:translate-x-0"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: [0, -8, 0] }}
             transition={{
@@ -120,15 +117,19 @@ export default function Hero() {
               y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: START + 1.5 },
             }}
           >
-            <p className="font-serif text-xl text-ink">4 Products Live</p>
-            <p className="text-xs text-ink/55">Shampoo · Conditioner · Serum · Mask</p>
+            <span className="h-2 w-2 animate-pulse rounded-full bg-gold"></span>
+            <div className="flex items-center gap-2">
+              <p className="font-serif text-sm font-medium text-ink">4 Products Live</p>
+              <span className="text-ink/20">·</span>
+              <p className="text- text-ink/60">Shampoo · Conditioner · Serum · Mask</p>
+            </div>
           </motion.div>
         </div>
       </div>
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs text-ink/50 md:flex"
+        className="absolute bottom-16 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs text-ink/40 md:flex"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: START + 1.4, duration: 1 }}

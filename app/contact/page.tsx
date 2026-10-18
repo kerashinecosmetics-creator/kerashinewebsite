@@ -120,7 +120,7 @@ export default function ContactPage() {
                 <motion.button
                   type="submit"
                   disabled={status === "sending"}
-                  className="focus-ring rounded-full bg-ink px-8 py-4 text-base font-semibold text-pearl disabled:opacity-60"
+                  className="focus-ring rounded-full bg-ink px-8 py-4 text-base font-semibold !text-white"
                   whileHover={{ scale: 1.03, y: -3 }}
                   whileTap={{ scale: 0.97 }}
                 >

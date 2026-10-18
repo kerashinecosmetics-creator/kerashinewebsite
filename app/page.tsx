@@ -13,14 +13,22 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      {/* FIXED: gap se har section ke beech mein space */}
+      <main className="flex flex-col gap-0">
         <Hero />
+        <div className="py-10 md:py-16" />
         <About />
+        <div className="py-10 md:py-16" />
         <Process />
+        <div className="py-10 md:py-16" />
         <Products />
+        <div className="py-10 md:py-16" />
         <Services />
+        <div className="py-10 md:py-16" />
         <Gallery />
+        <div className="py-10 md:py-16" />
         <Testimonials />
+        <div className="py-10 md:py-16" />
         <Contact />
       </main>
       <Footer />

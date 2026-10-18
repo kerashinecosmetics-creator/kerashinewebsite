@@ -44,14 +44,14 @@ export default function Gallery() {
           text="A look at the materials, equipment and people behind every KeraShine batch."
         />
 
-        <div className="mt-14 columns-2 gap-4 md:columns-3 md:gap-6">
+        <div className="mt-14 columns-2 gap-6 md:columns-3 md:gap-6">
           {galleryItems.map((g, i) => (
             <motion.button
               key={i}
               type="button"
               onClick={() => setOpen(i)}
               aria-label={`Open image: ${g.alt}`}
-              className="group focus-ring relative mb-4 block w-full break-inside-avoid overflow-hidden rounded-[2rem] shadow-soft md:mb-6"
+              className="group focus-ring relative block w-full break-inside-avoid overflow-hidden rounded-[2rem] shadow-soft"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewport}

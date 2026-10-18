@@ -18,3 +18,11 @@ body {
   color: #121212;
   overflow-x: hidden;
 }
+
+.field {
+  @apply w-full rounded-xl border border-ink/10 bg-white/60 px-4 py-3 text-ink outline-none transition focus:border-ink/30 focus:bg-white;
+}
+
+.field::placeholder {
+  @apply text-ink/35 font-normal;
+}
